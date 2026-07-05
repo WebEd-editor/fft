@@ -9,13 +9,13 @@
 async function register(){
 
     const data = {
-        uid: document.getElementById("uid").value,
-        ffid: document.getElementById("ffid").value,
-        name: document.getElementById("name").value,
-        mobile: document.getElementById("mobile").value
+        uid: uid.value,
+        ffid: ffid.value,
+        name: name.value,
+        mobile: mobile.value
     };
 
-    const res = await fetch("https://fft-user.onrender.com/api/register",{
+    const res = await fetch("http://localhost:3000/api/register",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
