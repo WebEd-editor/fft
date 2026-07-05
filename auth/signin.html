@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+<style>
+:root{
+    --bg:#0D1117;
+    --card:#121826;
+    --gold:#FFD54A;
+    --purple:#7A4DFF;
+    --text:#D8D8D8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:var(--text);
+    font-family: Inter, sans-serif;
+}
+
+.card{
+    width:90%;
+    max-width:380px;
+    background:var(--card);
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 35px rgba(0,0,0,.4);
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--purple),var(--gold));
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    font-weight:bold;
+    color:#fff;
+}
+
+h2{
+    text-align:center;
+    color:var(--gold);
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:16px;
+    border:none;
+    border-radius:10px;
+    background:#1A2233;
+    color:#fff;
+    outline:none;
+    border:2px solid transparent;
+    transition:.3s;
+}
+
+input:focus{
+    border-color:var(--gold);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,var(--purple),var(--gold));
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.links{
+    margin-top:18px;
+    text-align:center;
+}
+
+.links a{
+    color:var(--gold);
+    text-decoration:none;
+    font-size:14px;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">F</div>
+
+    <h2>Create Account</h2>
+
+    <input id="uid" placeholder="UID">
+    <input id="ffui" placeholder="Free Fire Id Name">
+    <input id="name" placeholder="Your Name">
+    <input id="mobile" type="password" placeholder="Mobile Number">
+
+    <button onclick="register()">
+        Create
+    </button>
+
+    <div class="links">
+        <a href="#">Login Account</a>
+    </div>
+
+</div>
+
+<script>
+async function register(){
+    const data = {
+        uid: document.getElementById("uid").value,
+        ffid: document.getElementById("ffid").value,
+        name: document.getElementById("name").value,
+        mobile: document.getElementById("mobile").value
+    };
+
+    localStorage.setItem('fft-userDetails', JSON.stringify(data));
+    
+    const res = await fetch("https://fft-user.onrender.com/api/register",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    alert(result.message);
+}
+
+
+</script>
+
+</body>
+</html>
