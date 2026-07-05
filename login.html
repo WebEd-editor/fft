@@ -6,25 +6,36 @@
 <button onclick="register()">Register</button>
 
 <script>
-async function register(){
+async function register() {
+    try {
+        const data = {
+            uid: document.getElementById("uid").value,
+            ffid: document.getElementById("ffid").value,
+            name: document.getElementById("name").value,
+            mobile: document.getElementById("mobile").value
+        };
 
-    const data = {
-        uid: uid.value,
-        ffid: ffid.value,
-        name: name.value,
-        mobile: mobile.value
-    };
+        const res = await fetch("https://fft-user.onrender.com/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    const res = await fetch("https://fft-user.onrender.com/api/register",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify(data)
-    });
+        const result = await res.json();
 
-    const result = await res.json();
+        if (!res.ok) {
+            throw new Error(result.message || "Registration failed");
+        }
 
-    alert(result.message);
+        alert(result.message);
+
+    } catch (err) {
+        console.error(err);
+
+        // Fetch error bhi alert hoga
+        alert("Fetch Error: " + err.message);
+    }
 }
 </script>
