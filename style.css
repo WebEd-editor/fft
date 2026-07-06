@@ -19,6 +19,7 @@
         --text: #D8D8D8;
     }
 
+.space{height:40px}
     .app {
         height: 100vh;
         display: flex;
