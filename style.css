@@ -208,6 +208,7 @@
         background: #0B101B;
         display: flex;
         border-top: 1px solid rgba(255, 255, 255, .05);
+        position: fixed; bottom: 0; width: 100%; left: 0;
     }
 
     .tab {
