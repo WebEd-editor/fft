@@ -42,10 +42,10 @@
             </div>
             <!-- PROFILE -->
             <div class="page" id="profile">
-                <div class="profile">
+                <div class="profile userProfile">
                     <div class="avatar"></div>
-                    <div class="name"> NOVAxFF </div>
-                    <div class="uid"> UID : 123456789 </div>
+                    <div class="name" id="name"> username </div>
+                    <div class="uid" id="uid"> UID : xxxxx000 </div>
                     <div class="stats">
                         <div class="stat">
                             <h3>28</h3> Match
@@ -102,6 +102,16 @@
             document.getElementById(tab.getAttribute("data")).classList.add("active");
         }
     });
+
+    function setField(){
+        if (!localStorage.getItem("fft-userDetails")){
+            document.querySelector('.userProfile').innerHTML = `<a href="https://webed-editor.github.io/fft/auth/signup.html">create account</a>`;
+        } else {
+            const {uid, ffid, name, mobile} = localStorage.getItem("fft-userDetails");
+            document.querySelector('#name').textContent = name;
+            document.querySelector('#uid').textContent = uid;
+        }
+    } 
     </script>
     
 </body>
