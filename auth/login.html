@@ -115,35 +115,29 @@ button:hover{
 
     <div class="logo">F</div>
 
-    <h2>Create Account</h2>
+    <h2>Login Account</h2>
 
     <input id="uid" placeholder="UID">
-    <input id="ffui" placeholder="Free Fire Id Name">
-    <input id="name" placeholder="Your Name">
     <input id="mobile" type="password" placeholder="Mobile Number">
 
-    <button onclick="register()">
-        Create
+    <button onclick="login()">
+        Login
     </button>
 
     <div class="links">
-        <a href="https://webed-editor.github.io/auth/signin.html">Login Account</a>
+        <a href="https://webed-editor.github.io/auth/signup.html">Create Account</a>
     </div>
 
 </div>
 
 <script>
-async function register(){
+async function login(){
     const data = {
         uid: document.getElementById("uid").value,
-        ffid: document.getElementById("ffid").value,
-        name: document.getElementById("name").value,
         mobile: document.getElementById("mobile").value
     };
-
-    localStorage.setItem('fft-userDetails', JSON.stringify(data));
     
-    const res = await fetch("https://fft-user.onrender.com/api/register",{
+    const res = await fetch("https://fft-user.onrender.com/api/login",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
