@@ -149,7 +149,7 @@ async function login(){
 
     alert(result.message);
 
-    localStorage.setItem('fft-userDetails', result.data);
+    localStorage.setItem('fft-userDetails', JSON.stringify(result.data));
 }
 
 
