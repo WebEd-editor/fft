@@ -148,6 +148,8 @@ async function login(){
     const result = await res.json();
 
     alert(result.message);
+
+    localStorage.setItem('fft-userDetails', result.data);
 }
 
 
