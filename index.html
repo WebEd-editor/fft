@@ -107,9 +107,9 @@
         if (!localStorage.getItem("fft-userDetails")){
             document.querySelector('.userProfile').innerHTML = `<a href="https://webed-editor.github.io/fft/auth/signup.html">create account</a>`;
         } else {
-            const {uid, ffid, name, mobile} = localStorage.getItem("fft-userDetails");
-            document.querySelector('#name').textContent = name;
-            document.querySelector('#uid').textContent = uid;
+            const dd = localStorage.getItem("fft-userDetails");
+            document.querySelector('#name').textContent = dd.name;
+            document.querySelector('#uid').textContent = dd.uid;
         }
     }
     setField();
