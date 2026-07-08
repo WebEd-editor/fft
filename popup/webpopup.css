@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+   
+body{
+   margin: 0; font-family: Inter, sans-serif;
+}
+
+.popup-overlay {
+   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+   display: flex;
+   background: rgba(0,0,0,0.4);
+   backdrop-filter: blur(2px);
+   flex-direction: column;
+}
+.popup-overlay .popup-model{
+   width: 320px; height: auto; border-radius: 10px;
+   background: #f2f2f2;
+   color: #000;
+   margin: 10px;
+   transform: translate(0px, 0px) scale(1px);   
+}
+.dark{background: #121212 !important; color: #f2f2f2 !important;}
+.dark p{color: #d8d8d8 !important;}
+.popup-model .popup-content{
+   margin: 20px;
+   display: flex; flex-direction: column;justify-content: center; align-items: center; 
+   text-align: center;
+   background: ;
+}
+.popup-content #icon{
+   width: 120px; height: 100px;
+   margin-bottom: 10px;
+}
+.popup-content h2{ margin: 0 0 20px 0; }
+.popup-content p{ margin: 0 0 20px 0; }
+.popup-content #popup-button{
+   width: 100%; display: flex; flex-direction: row; justify-content: space-around; align-items:  center;
+   gap: 20px;
+}
+#popup-button > button {
+   padding: 10px 20px; border: none; border-radius: 5px;
+   font-family: Inter, sans-serif;
+   text-transform: capitalize;
+   background: #111; color: white;
+   width: 100%;
+}
+.dark button{background: #f2f2f2 !important; color: black !important;}
+
+@keyframes fadeup{ from { opacity: 0; transform: translateY(20px); } }
+@keyframes fadedown{ from { opacity: 0; transform: translateY(-20px); } }
+@keyframes faderight{ from { opacity: 0; transform: translateX(20px); } }
+@keyframes fadeleft{ from { opacity: 0; transform: translateX(-20px); } }
+
+
+.circle,
+.line,
+.mark,
+.path{
+    fill:none;
+    stroke-width:5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.circle{
+    stroke-dasharray:188;
+    stroke-dashoffset:188;
+    animation:drawCircle .8s ease forwards;
+}
+
+.path{
+    stroke-dasharray:100;
+    stroke-dashoffset:100;
+    animation:drawPath .6s ease forwards;
+    animation-delay:.8s;
+}
+
+.line{
+    stroke-dasharray:40;
+    stroke-dashoffset:40;
+    animation:drawLine .4s ease forwards;
+    animation-delay:.8s;
+}
+
+.mark{
+    stroke-dasharray:20;
+    stroke-dashoffset:20;
+    animation:drawLine .3s ease forwards;
+    animation-delay:1.1s;
+}
+
+.loading{
+    animation:spin 1s linear infinite;
+}
+
+@keyframes drawCircle{
+    to{
+        stroke-dashoffset:0;
+    }
+} 
+
+@keyframes drawPath{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes drawLine{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.success{stroke:#22c55e;}
+.error{stroke:#ef4444;}
+.warning{stroke:#f59e0b;}
+.info{stroke:#3b82f6;}
+.question{stroke:#8b5cf6;}
+.loader{stroke:#6366f1;}
+
+#icon #error{
+   animation: errorAnim .8s ease forwards;
+   animation-delay: 1s;
+}
+
+@keyframes errorAnim{
+   0%,100%{transform: translate(0px,0px);}
+   30%{transform: translate(-10px,0px);}
+   40%{transform: translate(5px,0px);}
+   50%{transform: translate(-5px,0px);}
+   60%{transform: translate(10px,0px);}
+}
+
+#icon #success{
+   animation: successAnim .8s ease forwards;
+   animation-delay: 1s;
+}
+
+@keyframes successAnim{
+   0%,100%{transform: translate(0px,0px);}
+   40%{transform: translate(0px,-20px);}
+}
+
+#icon #info{
+   animation: infoAnim .8s ease forwards;
+   animation-delay: 1s;
+}
+
+@keyframes infoAnim{
+   0%,100%{transform: translate(0px,0px);}
+   40%{transform: translate(0px,-20px) scale(1.3) rotate(-20deg);}
+}
+
+#icon #alert{
+   animation: alertAnim .8s ease forwards;
+   animation-delay: 1s;
+}
+
+@keyframes alertAnim{
+   0%,100%{transform: translate(0px,0px);}
+   40%{transform: translate(0px,-20px) scale(1.3) rotate(-20deg);}
+   50%{transform: rotate(20deg);}
+   60%{transform: rotate(-10deg);}
+   70%{transform: rotate(10deg);}
+}
+
+
+
+
+
+
