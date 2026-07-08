@@ -63,6 +63,9 @@
                         <div class="item"> History > </div>
                         <div class="item"> Settings > </div>
                     </div>
+                    <div class="menu">
+                        <div class="item"><a href="https://webed-editor.github.io/fft/auth/login.html"> Log out </a></div>
+                    </div>
                 </div>
                 <div class="space"></div>
             </div>
@@ -103,16 +106,18 @@
         }
     });
 
-    function setField(){
+    (() => {
         if (!localStorage.getItem("fft-userDetails")){
-            document.querySelector('.userProfile').innerHTML = `<a href="https://webed-editor.github.io/fft/auth/signup.html">create account</a>`;
+            document.querySelector('.userProfile').innerHTML = `
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
+            `;
         } else {
             const dd = JSON.parse(localStorage.getItem("fft-userDetails"));
             document.querySelector('#name').textContent = dd.name;
             document.querySelector('#uid').textContent = dd.uid;
         }
-    }
-    setField();
+    })();
     </script>
     
 </body>
