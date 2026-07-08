@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+<script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+<link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
 <style>
 :root{
     --bg:#0D1117;
@@ -131,11 +133,39 @@ button:hover{
 </div>
 
 <script>
+
+function palert(txt){
+let s = new webpopup({
+   title: txt,
+   description: "",
+   type:"success",
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+});
+setTimeout(()=> {s.remove()}, 500);
+}
+
 async function login(){
     const data = {
         uid: document.getElementById("uid").value,
         mobile: document.getElementById("mobile").value
     };
+
+let l = new webpopup({
+   title: "",
+   description: "",
+   type:"loading",
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+});
+l.show();
+
     
     const res = await fetch("https://fft-user.onrender.com/api/login",{
         method:"POST",
@@ -147,7 +177,8 @@ async function login(){
 
     const result = await res.json();
 
-    alert(result.message);
+    l.remove();
+    palert(result.message);
 
     localStorage.setItem('fft-userDetails', JSON.stringify(result.data));
 }
