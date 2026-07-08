@@ -1,71 +1,16 @@
 
-const home = [
-   {
-      banner: [
-         {
-            h2: "Weekend Champions League",
-            time: "30 Jun 2026 15:09:48 GMT",
-            p: "Win ₹200 Price Pool",
-            button: "Register Now"
-         },
-         {
-            h2: "Weekend Champions League",
-            time: "30 Jun 2026 15:09:48 GMT",
-            p: "Win ₹200 Price Pool",
-            button: "Register Now"
-         },
-      ],
-      
-      live: [
-         {
-            h2: "Infinity Champions League",
-            p: "Win ₹7200 Price Pool",
-         },
-      ],
-      
-      upcoming: [
-         {
-            h2: "Week Champions League",
-            p: "Win ₹200 Price Pool",
-            time: "30 Jun 2026 15:09:48 GMT",
-            button: "Register Now"
-         },
-         {
-            h2: "month Champions League",
-            p: "Win ₹200 Price Pool",
-            time: "3 July 2026 15:09:48 GMT",
-            button: "Register Now"
-         },
-         {
-            h2: "Universal Champions League",
-            p: "Win ₹200 Price Pool",
-            time: "6 July 2026 15:09:48 GMT",
-            button: "Register Now"
-         },
-      ],
-      
-      registration: [
-         {
-            live: true,
-            map: "bermuda",
-            name: "FF Champions Cup",
-            type: "squad",
-            price: 200,
-            fee: 10,
-            seat: 40,
-            available: 10
-         }
-      ],
-   }
-];
 
-function homePageContent(){
+
+async function homePageContent(){
    const h = document.getElementById("home");
    const b = h.querySelector('.banners');
    const l = h.querySelector('.lives');
    const u = h.querySelector('.upcomings');
    
-   home.forEach(k => {
+   const res = await fetch("https://fft-registration.onrender.com/api/content");
+   const result = await res.json();
+   const k = result.data;
+
       if(k.banner) {
          b.innerHTML = '';
          if(k.banner.length > 0) {
@@ -95,10 +40,22 @@ function homePageContent(){
          }
          for(let i = 0; i < k.live.length; i++){
             l.innerHTML += `
-               <div class="card">
-                  <div class="badge live"> LIVE </div>
-                  <h3>${k.live[i].h2}</h3>
-                  <p class="price" style="margin-top: 10px;">${k.live[i].p}</p>
+               <div class="card2" style="display: block">
+                  <div class="right" style="background: linear-gradient(to bottom, transparent 0%, transparent 0%, rgba(0,0,0,0.8) 70%, #000 100%), url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg') center/cover no-repeat;">
+                    <div class="tag live" style="background: #ff3b30;color:white">live</div>
+                    <div class="tag">${k.live[i].mode.toUpperCase()}</div>
+                    <div class="title"> ${k.live[i].h2.toUpperCase()} <br><br> SEASON ${k.live[i].s} </div>
+                  </div>
+                  <div class="bottomc" style="margin: 0 15px 15px 15px;">
+                       <div>
+                          <div class="small">Prize Pool</div>
+                          <div class="prize">🪙 ${k.live[i].p}</div>
+                       </div>
+                       <div style="justify-content: center; align-items: flex-start;">
+                          <div class="small">Players</div>
+                          <div class="open">${k.live[i].players}</div>
+                       </div>
+                  </div>
                </div>
             `;
          }
@@ -113,16 +70,28 @@ function homePageContent(){
          }
          for(let i = 0; i < k.upcoming.length; i++){
             u.innerHTML += `
-               <div class="card">
-                  <h3>${k.upcoming[i].h2}</h3>
-                  <p style="margin-top: 10px;"> ${new Date(k.upcoming[i].time).getUTCDate()} ${getMonthName(new Date(k.upcoming[i].time).getUTCMonth())} • ${getHour12(k.upcoming[i].time)} ${getAmPm(k.upcoming[i].time)}</p>
-                  <p style="color: var(--gold)">${k.upcoming[i].p}</p>
-                  <button>Register Now</button>
+               <div class="card2">
+                  <div class="left" style="background: url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg'); background-size: cover; background-position: center center;"></div>
+                  <div class="right">
+                    <div class="tag">${k.upcoming[i].mode.toUpperCase()}</div>
+                    <div class="title"> ${k.upcoming[i].h2.toUpperCase()} <br> SEASON ${k.upcoming[i].s} </div>
+                    <div class="bottomc">
+                       <div>
+                          <div class="small">Prize Pool</div>
+                          <div class="prize">🪙 ${k.upcoming[i].p}</div>
+                          <div class="small" style="color:#f2f2f2; margin-top: 10px;">Entry Fee ${k.upcoming[i].fee}</div>
+                       </div>
+                       <div class="date">
+                          <div class="small" style="color:#f2f2f2">${new Date(k.upcoming[i].time).getUTCDate()} ${getMonthName(new Date(k.upcoming[i].time).getUTCMonth())} ${getHour12(k.upcoming[i].time)} ${getAmPm(k.upcoming[i].time)}</div>
+                          <div class="small" style="margin-top:10px;">Registration</div>
+                          <div class="open">OPEN</div>
+                       </div>
+                    </div>
+                  </div>
                </div>
             `;
          }
       }
-   });
    
 }
 homePageContent();
@@ -146,3 +115,4 @@ function getMonthName(month) {
     return months[month - 1] || "";
 }
 
+             
