@@ -7,6 +7,11 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <!-- ><-->
+
+    <script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+    <link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
+    
+
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
     
     <title>FF Tournament</title>
@@ -92,6 +97,17 @@
     </div>
     
     <script>
+const loader = new webpopup({
+   title: "please wait",
+   description: "",
+   type:"loading",
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+});
+
         ///
     let tabs = document.querySelectorAll(".tab");
     let pages = document.querySelectorAll(".page");
