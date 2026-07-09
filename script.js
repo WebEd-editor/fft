@@ -2,6 +2,7 @@
 
 
 async function homePageContent(){
+   loader.show();
    const h = document.getElementById("home");
    const b = h.querySelector('.banners');
    const l = h.querySelector('.lives');
@@ -10,6 +11,7 @@ async function homePageContent(){
    const res = await fetch("https://fft-registration.onrender.com/api/content");
    const result = await res.json();
    const k = result.data;
+   loader.remove();
 
       if(k.banner) {
          b.innerHTML = '';
