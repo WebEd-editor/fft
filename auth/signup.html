@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+<script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+<link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
+
 <style>
 :root{
     --bg:#0D1117;
@@ -133,6 +136,22 @@ button:hover{
 </div>
 
 <script>
+
+function palert(t, txt){
+ let s = new webpopup({
+   title: txt,
+   description: "",
+   type: t,
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+ });
+ s.show();
+ setTimeout(()=> {s.remove()}, 500);
+}
+
 async function register(){
     const data = {
         uid: document.getElementById("uid").value,
@@ -140,6 +159,18 @@ async function register(){
         name: document.getElementById("name").value,
         mobile: document.getElementById("mobile").value
     };
+
+let l = new webpopup({
+   title: "",
+   description: "",
+   type:"loading",
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+});
+l.show();
 
     localStorage.setItem('fft-userDetails', JSON.stringify(data));
     
@@ -152,8 +183,9 @@ async function register(){
     });
 
     const result = await res.json();
+    l.remove();
 
-    alert(result.message);
+    palert(result.type, result.message);
 }
 
 
