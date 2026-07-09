@@ -134,17 +134,18 @@ button:hover{
 
 <script>
 
-function palert(txt){
+function palert(t, txt){
 let s = new webpopup({
    title: txt,
    description: "",
-   type:"success",
+   type: t,
    animation:"fadedown",
    cancelable:false,
    theme: "dark",
    buttons:[],
    position:"center center",
 });
+s.show();
 setTimeout(()=> {s.remove()}, 500);
 }
 
@@ -178,8 +179,8 @@ l.show();
     const result = await res.json();
 
     l.remove();
-    palert(result.message);
-
+    palert(result.type, result.message);
+    
     localStorage.setItem('fft-userDetails', JSON.stringify(result.data));
 }
 
