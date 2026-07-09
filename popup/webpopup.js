@@ -89,6 +89,7 @@ class webpopup {
   getIcon() {
     switch (this.type) {
       case "alert": return `<svg id="alert" viewBox="0 0 100 100"><path class="path warning" d="M50 20 L80 75 L20 75 Z"/><line class="line warning" x1="50" y1="38" x2="50" y2="58"/><line class="mark warning" x1="50" y1="66" x2="50" y2="67"/></svg>`;
+      case "warning": return `<svg id="alert" viewBox="0 0 100 100"><path class="path warning" d="M50 20 L80 75 L20 75 Z"/><line class="line warning" x1="50" y1="38" x2="50" y2="58"/><line class="mark warning" x1="50" y1="66" x2="50" y2="67"/></svg>`;
       case "info": return `<svg id="info" viewBox="0 0 100 100"><circle class="circle info" cx="50" cy="50" r="30"/> <line class="line info" x1="50" y1="45" x2="50" y2="62"/><line class="mark info" x1="50" y1="35" x2="50" y2="36"/></svg>`;
       case "success": return `<svg id="success" viewBox="0 0 100 100"><circle class="circle success" cx="50" cy="50" r="30"/><path class="path success" d="M38 50 L48 60 L65 40"/></svg>`;
       case "loading": return `<svg id="loading" class="loading" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#6366f1" stroke-width="6" stroke-linecap="round" stroke-dasharray="120 80"/></svg>`;
