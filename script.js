@@ -86,7 +86,7 @@ async function homePageContent(){
                        <div class="date">
                           <div class="small" style="color:#f2f2f2">${new Date(k.upcoming[i].time).getUTCDate()} ${getMonthName(new Date(k.upcoming[i].time).getUTCMonth())} ${getHour12(k.upcoming[i].time)} ${getAmPm(k.upcoming[i].time)}</div>
                           <div class="small" style="margin-top:10px;">Registration</div>
-                          <div class="open">OPEN</div>
+                          <div class="open" onclick="openForm('${k.upcoming[i].id}')">OPEN</div>
                        </div>
                     </div>
                   </div>
@@ -97,6 +97,44 @@ async function homePageContent(){
    
 }
 homePageContent();
+
+async function openForm(id) {
+  loader.show();
+  try {
+    const res = await fetch(`https://fft-registration.onrender.com/api/tournament/${id}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch tournament.");
+    }
+
+    const result = await res.json();
+    loader.remove();
+
+    if (result.status.canRegister) {
+      window.location.href = `https://webed-editor.github.io/fft/form/registration.html?${result.newtournament.id}`;
+    } else {
+      palert("alert", "Tournament is not available", []);
+    }
+  } catch (err) {
+    console.error(err);
+    loader.remove();
+    palert("error", "Something went wrong. Please try again later.", []);
+  }
+}
+
+function palert(type, text, buttons = []) {
+  const popup = new webpopup({
+    title: text,
+    description: "",
+    type: type,
+    animation: "fadedown",
+    cancelable: true,
+    theme: "dark",
+    buttons: buttons,
+    position: "center center",
+  });
+  popup.show();
+}
 
 function getAmPm(utc) {
     return new Date(utc).getUTCHours() >= 12 ? "PM" : "AM";
@@ -117,4 +155,3 @@ function getMonthName(month) {
     return months[month - 1] || "";
 }
 
-             
