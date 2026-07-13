@@ -111,7 +111,7 @@ async function openForm(id) {
     loader.remove();
 
     if (result.status.canRegister) {
-      window.location.href = `https://webed-editor.github.io/fft/form/registration.html?${result.newtournament.id}`;
+      window.location.href = `https://webed-editor.github.io/fft/form/registration.html?id=${result.newtournament.id}`;
     } else {
       palert("alert", "Tournament is not available", []);
     }
