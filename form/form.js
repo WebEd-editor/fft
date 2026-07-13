@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const tournamentId = params.get("id");
 
-alert("id is "+tournamentId);
+alert("id is  "+tournamentId);
 
 let formData;
 
