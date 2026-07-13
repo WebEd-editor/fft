@@ -1,6 +1,8 @@
 const params = new URLSearchParams(window.location.search);
 const tournamentId = params.get("id");
 
+alert("id is "+tournamentId);
+
 let formData;
 
 const loader = new webpopup({
@@ -25,6 +27,7 @@ async function loadForm(){
 
     const result = await res.json();
     formData = result.newtournament;
+    alert("formData: \n"+JSON.stringify(formData, null, 2));
     document.getElementById("tt").innerText = formData.h2;
     document.getElementById("pp").innerText = formData.p;
     document.getElementById("ef").innerText = formData.fee;
@@ -46,6 +49,7 @@ async function loadForm(){
     console.error(err);
     loader.remove();
     palert("error", "Something went wrong. Please try again later.", []);
+    alert("error\n"+err);
   }
 }
 loadForm();
