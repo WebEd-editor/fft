@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<script src="https://webed-editor.github.io/fft/form/form.js" defer></script>
 
+    <script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+    <link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
+    
 <title>FF Tournament Registration</title>
 
 <style>
@@ -136,27 +138,27 @@ button:hover{
     <!-- Layer 1 -->
 
     <div class="top">
-        <h1>FREE FIRE TOURNAMENT</h1>
+        <h1 id="tt">FREE FIRE TOURNAMENT</h1>
 
         <div class="info">
             <div class="box">
                 <span>Prize Pool</span>
-                <b>₹10,000</b>
+                <b id="pp">₹10,000</b>
             </div>
 
             <div class="box">
                 <span>Entry Fee</span>
-                <b>₹200</b>
+                <b id="ef">₹200</b>
             </div>
 
             <div class="box">
                 <span>Mode</span>
-                <b>Squad</b>
+                <b id="md">Squad match</b>
             </div>
 
             <div class="box">
                 <span>Date</span>
-                <b>10 July</b>
+                <b id="dt">10 July</b>
             </div>
         </div>
     </div>
@@ -201,4 +203,3 @@ button:hover{
 
 </body>
 </html>
-
