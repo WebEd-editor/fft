@@ -32,6 +32,7 @@ async function loadForm(){
     document.getElementById("dt").innerHTML = `${new Date(formData.time).getUTCDate()} ${getMonthName(new Date(formData.time).getUTCMonth())} ${getHour12(formData.time)} ${getAmPm(formData.time)}`;
     
     const mode = formData.mode;
+    document.getElementById("getFormBtn").onclick = () => registerTournament(formData);
     printForm(mode);
     
     loader.remove();
@@ -73,6 +74,102 @@ function printForm(mode) {
             </div>
         `;
     }
+}
+
+async function registerTournament(d) {
+
+    let data = {
+       tournament: {
+          id: d.id,
+          title: d.h2,
+          mode: d.mode,
+          entryFee: d.fee
+       },
+       users: getFormData(d.mode)
+    }
+    console.log(JSON.stringify(data, null, 2));
+
+    loader.show();
+    const res = await fetch("https://fft-user.onrender.com/api/user/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+        registerTeam(d);
+        return;
+    }
+    
+    // duplicate users
+    if (result.duplicateUsers) {
+       let message = "";
+       result.duplicateUsers.forEach(user => {
+           message += `Player ${user.player} has duplicate UID (${user.uid}).\n`;
+       });
+       alert(message);
+       return;
+    }
+
+    // Invalid users
+    if (result.invalidUsers) {
+        let message = "";
+        result.invalidUsers.forEach(user => {
+            message += `Player ${user.player} (UID: ${user.uid}) is invalid.\n`;
+        });
+        alert(message);
+        return;
+    }
+
+    // Other errors
+    alert(result.message || "Something went wrong."); 
+}
+
+async function registerTeam(d) {
+
+    const data = {
+        tournamentId: d.id,
+        user: getFormData(d.mode)
+    };
+    console.log(JSON.stringify(data, null, 3));
+
+    const res = await fetch("https://fft-registration.onrender.com/api/user/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+        loader.remove();
+        alert("Registration Successful");
+        return;
+    } else {
+        loader.remove();
+        alert(result.message);
+    }
+}
+
+function getFormData(mode) {
+    const totalPlayers = modes[mode.toLowerCase().trim()];
+    const data = [];
+
+    for (let i = 1; i <= totalPlayers; i++) {
+        data.push({
+            uid: document.querySelector(`.uid${i}`).value,
+            ffid: document.querySelector(`.ffid${i}`).value
+        });
+        if(document.querySelector(`.uid${i}`).value === "" || document.querySelector(`.ffid${i}`).value === ""){return;};
+    }
+
+    return data;
 }
 
 function palert(type, text, buttons = []) {
