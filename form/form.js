@@ -44,10 +44,9 @@ async function loadForm(){
       document.querySelector('.form').innerHTML = `<h2>Tournament Not Available</h2>`;
     }
   } catch (err) {
-    
+    console.error(err);
     loader.remove();
-    alert(err);
-    //palert("error", "Something went wrong. Please try again later.", []);
+    palert("error", "Something went wrong. Please try again later.", []);
   }
 }
 loadForm();
@@ -88,9 +87,10 @@ async function registerTournament(d) {
        },
        users: getFormData(d.mode)
     }
-    console.log(JSON.stringify(data, null, 2));
-
+    
     loader.show();
+    formValidation(data);
+
     const res = await fetch("https://fft-user.onrender.com/api/user/register", {
         method: "POST",
         headers: {
@@ -128,6 +128,24 @@ async function registerTournament(d) {
 
     // Other errors
     alert(result.message || "Something went wrong."); 
+}
+
+async function formValidation(d){
+   const res = await fetch("https://fft-registration.onrender.com/api/user/register/validation", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(d)
+    });
+    
+    const result = await res.json();
+
+    if (!result.success) {
+        loader.remove();
+        alert(result.message);
+        return;
+    }
 }
 
 async function registerTeam(d) {
