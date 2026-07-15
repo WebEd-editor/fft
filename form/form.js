@@ -44,9 +44,10 @@ async function loadForm(){
       document.querySelector('.form').innerHTML = `<h2>Tournament Not Available</h2>`;
     }
   } catch (err) {
-    alert(err);
+    
     loader.remove();
-    palert("error", "Something went wrong. Please try again later.", []);
+    alert(err);
+    //palert("error", "Something went wrong. Please try again later.", []);
   }
 }
 loadForm();
