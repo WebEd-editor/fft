@@ -70,7 +70,9 @@ async function homePageContent(){
                <h2 class="section-title"> Upcoming Matches </h2>
             `;
          }
+         let s;
          for(let i = 0; i < k.upcoming.length; i++){
+            if(Date.now() > new Date(k.upcoming[i].registration.endTime).getTime()){ s = `<div style="color: red;">CLOSED</div>`; }else{s="OPEN"}
             u.innerHTML += `
                <div class="card2">
                   <div class="left" style="background: url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/aa959aa3d8790d3a44f7f20f16adfa01.jpg'); background-size: cover; background-position: center center;"></div>
@@ -86,7 +88,7 @@ async function homePageContent(){
                        <div class="date">
                           <div class="small" style="color:#f2f2f2">${new Date(k.upcoming[i].time).getUTCDate()} ${getMonthName(new Date(k.upcoming[i].time).getUTCMonth())} ${getHour12(k.upcoming[i].time)} ${getAmPm(k.upcoming[i].time)}</div>
                           <div class="small" style="margin-top:10px;">Registration</div>
-                          <div class="open" onclick="openForm('${k.upcoming[i].id}')">OPEN</div>
+                          <div class="open" onclick="openForm('${k.upcoming[i].id}')">${s}</div>
                        </div>
                     </div>
                   </div>
