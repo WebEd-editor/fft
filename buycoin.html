@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Coins</title>
+
+<style>
+:root{
+    --purple:#8b5cf6;
+    --purple2:#5b21b6;
+    --card:#14141d;
+    --gold:#FFD54A;
+    --green:#00d26a;
+    --gray:#9ca3af;
+    --text:#fff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,#41208d 0%,transparent 45%),
+    linear-gradient(#09090f,#14141d);
+    color:#fff;
+    padding:18px;
+}
+
+.container{
+    max-width:420px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(20,20,29,.95);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:22px;
+    padding:22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    margin-bottom:18px;
+}
+
+.coin{
+    width:85px;
+    height:85px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(#ffe88b,var(--gold));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    box-shadow:0 0 30px rgba(255,213,74,.55);
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{transform:scale(1);}
+to{transform:scale(1.06);}
+}
+
+h2{
+    text-align:center;
+    margin:15px 0 6px;
+}
+
+.sub{
+    text-align:center;
+    color:var(--gray);
+    margin-bottom:20px;
+}
+
+.steps{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.step{
+    width:31%;
+    text-align:center;
+    font-size:12px;
+    color:var(--gray);
+}
+
+.step span{
+    display:inline-flex;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:linear-gradient(var(--purple),var(--purple2));
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    margin-bottom:6px;
+}
+
+label{
+    display:block;
+    margin:15px 0 8px;
+    color:#ddd;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:2px solid #312d45;
+    background:#1b1b27;
+    color:#fff;
+    font-size:16px;
+}
+
+input:focus{
+    outline:none;
+    border-color:var(--purple);
+}
+
+.price{
+    margin-top:18px;
+    background:#1b1b27;
+    border-radius:16px;
+    padding:18px;
+}
+
+.price h3{
+    color:var(--gray);
+    font-size:14px;
+}
+
+.amount{
+    font-size:34px;
+    color:var(--gold);
+    font-weight:bold;
+}
+
+.qr{
+    width:210px;
+    height:210px;
+    background:#fff;
+    border-radius:18px;
+    margin:15px auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#000;
+    font-weight:bold;
+}
+
+.upi{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#1b1b27;
+    padding:12px;
+    border-radius:12px;
+    margin-top:12px;
+}
+
+.copy{
+    background:var(--purple);
+    border:none;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:8px;
+}
+
+.upload{
+    border:2px dashed var(--purple);
+    border-radius:16px;
+    text-align:center;
+    padding:30px 15px;
+    color:var(--gray);
+    margin-top:10px;
+}
+
+.upload input{
+    display:none;
+}
+
+.upload label{
+    cursor:pointer;
+    margin:0;
+}
+
+.note{
+    margin-top:18px;
+    background:rgba(0,210,106,.12);
+    color:var(--green);
+    padding:14px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+button.pay{
+    width:100%;
+    margin-top:20px;
+    padding:17px;
+    border:none;
+    border-radius:16px;
+    font-size:17px;
+    font-weight:bold;
+    color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--purple2));
+}
+
+.footer{
+    text-align:center;
+    color:var(--gray);
+    font-size:13px;
+    margin-top:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="coin">🪙</div>
+
+<h2>Buy Coins</h2>
+
+<div class="sub">
+Fast • Secure • Instant
+</div>
+
+<div class="steps">
+<div class="step">
+<span>1</span><br>
+Coins
+</div>
+
+<div class="step">
+<span>2</span><br>
+Pay
+</div>
+
+<div class="step">
+<span>3</span><br>
+Claim
+</div>
+</div>
+
+<p style="text-align:center;color:#FFD54A;font-weight:bold;">
+1 Coin = ₹2
+</p>
+
+<label>Enter Coins</label>
+<input id="coins" type="number" value="100">
+
+<div class="price">
+<h3>Total Amount</h3>
+<div class="amount" id="amount">₹200</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h3 style="text-align:center;">📱 Scan & Pay</h3>
+
+<div class="qr">
+QR CODE
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>📝 Payment Details</h3>
+
+<label>Your Name</label>
+<input type="text" placeholder="Enter your Name">
+
+<label>Transaction ID / UTR</label>
+<input type="text" placeholder="Enter UTR Number">
+
+<div class="upload">
+
+<label for="file">
+📷 Tap to Upload Screenshot<br><br>
+<small>PNG • JPG • JPEG</small>
+</label>
+
+<input id="file" type="file" accept="image/*">
+
+</div>
+
+<div class="note">
+✅ Coins will be credited within 30-60 minutes after payment verification.
+</div>
+
+<button class="pay" id="payBtn">
+Pay ₹200 & Claim 100 Coins
+</button>
+
+<div class="footer">
+🔒 100% Secure Manual Verification
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const coin=document.getElementById("coins");
+const amount=document.getElementById("amount");
+const payBtn=document.getElementById("payBtn");
+
+function update(){
+   let c=parseInt(coin.value)||0;
+   let total=c*2;
+
+   amount.innerHTML="₹"+total;
+   payBtn.innerHTML="Pay ₹"+total+" & Claim "+c+" Coins";
+}
+
+coin.oninput=update;
+update();
+
+</script>
+
+</body>
+</html>
