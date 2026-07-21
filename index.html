@@ -122,50 +122,37 @@ const loader = new webpopup({
         }
     });
 
-    /* (() => {
-        if (!localStorage.getItem("fft-userDetails")){
-            document.querySelector('.userProfile').innerHTML = `
+(async () => {
+
+    const token = localStorage.getItem("f-token");
+
+    if (!token) {
+        document.querySelector('.userProfile').innerHTML = `
                <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
                <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
-            `;
-        } else {
-            const dd = JSON.parse(localStorage.getItem("fft-userDetails"));
-            document.querySelector('#name').textContent = dd.name;
-            document.querySelector('#uid').textContent = dd.uid;
+        `;
+        return;
+    }
+
+    const response = await fetch("https://fft-user.onrender.com/api/me", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
         }
-    })(); */
+    });
 
-    (async () => {
-        const token = localStorage.getItem("f-token");
-        if(!token){
-            document.querySelector('.userProfile').innerHTML = `
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
-            `;
-        }
+    const data = await response.json();
 
-        const res = await fetch("https://fft-user.onrender.com/api/me", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
+    if (data.success) {
+        console.log(data.data);
 
-        const data = await res.json();
+        document.getElementById("name").textContent = data.data.name;
+        document.getElementById("uid").textContent = data.data.uid;
+    } else {
+        alert(data.message);
+    }
 
-        if(!data.success){
-            localStorage.removeItem("f-token");
-            document.querySelector('.userProfile').innerHTML = `
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
-            `;
-        }
-
-        console.log(data);
-
-        document.querySelector('#name').textContent = data.name;
-        document.querySelector('#uid').textContent = data.uid;        
-    })();
+})();
     </script>
     
 </body>
