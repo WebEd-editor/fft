@@ -135,7 +135,7 @@ const loader = new webpopup({
     }
 
     const response = await fetch("https://fft-user.onrender.com/api/me", {
-        method: "POST",
+        method: "GET",
         headers: {
             "Authorization": `Bearer ${token}`
         }
