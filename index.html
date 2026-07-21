@@ -149,7 +149,7 @@ const loader = new webpopup({
         document.getElementById("name").textContent = data.data.name;
         document.getElementById("uid").textContent = data.data.uid;
     } else {
-        alert(data.message);
+        console.log(JSON.stringify(data.message, null, 3));
     }
 
 })();
