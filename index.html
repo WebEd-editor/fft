@@ -122,7 +122,7 @@ const loader = new webpopup({
         }
     });
 
-    (() => {
+    /* (() => {
         if (!localStorage.getItem("fft-userDetails")){
             document.querySelector('.userProfile').innerHTML = `
                <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
@@ -133,6 +133,37 @@ const loader = new webpopup({
             document.querySelector('#name').textContent = dd.name;
             document.querySelector('#uid').textContent = dd.uid;
         }
+    })(); */
+
+    (async () => {
+        const token = localStorage.getItem("f-token");
+        if(!token){
+            document.querySelector('.userProfile').innerHTML = `
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
+            `;
+        }
+
+        const res = await fetch("https://fft-user.onrender.com/api/me", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const data = await res.json();
+
+        if(!data.success){
+            localStorage.removeItem("f-token");
+            document.querySelector('.userProfile').innerHTML = `
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
+               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
+            `;
+        }
+
+        console.log(data);
+
+        document.querySelector('#name').textContent = data.name;
+        document.querySelector('#uid').textContent = data.uid;        
     })();
     </script>
     
