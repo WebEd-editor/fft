@@ -1,11 +1,15 @@
 <!-- this code made in webed -->
 <!-- full code made in WebEd tool -->
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link id="google-font-Inter" href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" style="" />
   <link id="google-font-Inter" href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet" style="" />
-  
+  <script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+<link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
+
   <style id="webed-extracted-css">
     .we-1abo2vc {
   background: rgb(0, 0, 0);
@@ -123,7 +127,7 @@
   background-blend-mode: screen;
   border-radius: 0px;
   opacity: 1;
-  width: 40%;
+  width: 60%;
 }
 .we-8810fy {
   background-blend-mode: screen;
@@ -150,7 +154,7 @@
 </head>
 <body class="selected we-1abo2vc">
   <section class="we-121h4j0">
-    <h2 class="" style="">
+    <h2 class="" style="" id="name">
       My Wallet
     </h2>
     <div class="we-1ef956y">
@@ -163,25 +167,138 @@
         </p>
       </div>
       <div class="we-1z0b4zc">
-        <button class="we-ri3kf3" id="buycoin">
+        <button class="we-ri3kf3" id="addCoinBtn">
           + Add Coin 🪙
         </button>
-        <button class="we-ri3kf3" id="withdraw">
+        <button class="we-ri3kf3" id="withdrawCoinBtn">
           Withdraw Cash
         </button>
       </div>
     </div>
-    <h2>
+    <h2 class="" style="">
       Payment History
     </h2>
-    <div class="we-ohiwpl" id="paymentHistory">
+    <div class="we-ohiwpl" id="history">
       <div>
-         <p style="margin-top: 70px; text-align: center; color: grey">No Payment Record</p>
+         <p style="margin-top: 40px; text-align: center; color: grey">No Payment Record</p>
       </div>
     </div>
   </section>
+
+
 <script>
+   
+const l = new webpopup({
+   title: "please wait",
+   description: "",
+   type:"loading",
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+});
 
+function palert(t, txt){
+  let s = new webpopup({
+   title: txt,
+   description: "",
+   type: t,
+   animation:"fadedown",
+   cancelable:false,
+   theme: "dark",
+   buttons:[],
+   position:"center center",
+  });
+  s.show();
+}
+
+(async () => {
+
+    const l = new webpopup({ title: "please wait", description: "", type:"loading", animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center",});
+    function palert(t, txt){ let s = new webpopup({ title: txt, description: "", type: t, animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center", }); s.show();}
+
+    l.show();
+    const token = localStorage.getItem("f-token");
+
+    if (!token) {
+        l.remove();
+        palert("alert","Login your account");
+        return;
+    }
+
+    const response = await fetch("https://fft-user.onrender.com/api/me", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        l.remove();
+
+        document.getElementById("coin").textContent = "🪙 " + (data?.data?.coin ?? "0.00");
+        document.getElementById("cash").textContent = (data.data.coin * 2) || "0.00";
+        document.getElementById("name").textContent = data.data.name + "'s Wallet";
+        document.getElementById("addCoinBtn").onclick = () => window.location.href = "https://webed-editor.github.io/fft/buycoin.html?id=${data.data.uid}";
+        const h = document.getElementById("history");
+        h.innerHTML="";
+        data.data.payment.forEach(p => {
+           let color="#2a7d2b";
+           let c = p.amount.replace(/^₹/, "").trim();
+           if(p.status === "pending"){color="grey"}
+           h.innerHTML += `
+               <div class="we-fm40gy">
+                 <div class="we-l7e3xk" style="background: ${color}">
+                    FFT
+                 </div>
+                 <div class="we-94zua8">
+                   <h2 class="we-8810fy">
+                     🪙 ${c/2}
+                   </h2>
+                   <p class="we-o3l2nv" style="font-size: 13px">
+                     ${formatDateTime(p.paymentDate)}
+                   </p>
+                   <p class="we-o3l2nv" style="color: ${color}; font-size: 13px;">
+                      • ${p.status}
+                   </p>                   
+                 </div>
+                 <h2 class="we-3pniy8">
+                   ${p.amount}
+                 </h2>
+               </div>
+           `;
+        });
+    } else {
+        l.remove();
+        h.innerHTML = `
+        <div>
+         <p style="margin-top: 40px; text-align: center; color: grey">No Payment Record</p>
+        </div>
+        `;
+        console.log(JSON.stringify(data.message, null, 3));
+    }
+    
+function formatDateTime(dateString) {
+  const date = new Date(dateString);
+
+  const month = date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+
+  let hours = date.getUTCHours();
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12 || 12;
+
+  return `${month} ${day} ${year}, ${String(hours).padStart(2, "0")} : ${minutes} ${ampm}`;
+}
+
+})();
 </script>
-</body>
 
+</body>
+</html>
