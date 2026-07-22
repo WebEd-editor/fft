@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
+<link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
+
+
 <title>Buy Coins</title>
 
 <style>
@@ -272,6 +277,10 @@ button.pay{
 
 <script>
 
+const l = new webpopup({ title: "please wait", description: "", type:"loading", animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center",});
+    function palert(t, txt){ let s = new webpopup({ title: txt, description: "", type: t, animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center", }); s.show();}
+
+
 const coin=document.getElementById("coins");
 const amount=document.getElementById("amount");
 const payBtn=document.getElementById("payBtn");
@@ -293,16 +302,17 @@ function copyUPI(){
 }
 
 async function buyCoin() {
-    /*const params = new URLSearchParams(window.location.search);
-    const uid = params.get("id");*/
-    const uid = "1000292928";
+    l.show();
+    const params = new URLSearchParams(window.location.search);
+    const uid = params.get("id");
+    if(!uid){document.querySelector("body").text content = "login your profile."; l.remove();}
     const name = document.getElementById("user_name").value.trim();
     const utr = document.getElementById("user_utr").value.trim();
     const file = document.getElementById("user_screenshot").files[0];
     const amount = document.getElementById("amount").textContent;
 
     if (!name || !utr || !file || !coins) {
-        alert("Please type all fields (name, UTR, file, coins).");
+        palert("alert","Please type all fields (name, UTR, file, coins).");l.remove();
         return;
     }
 
@@ -322,13 +332,13 @@ async function buyCoin() {
         const data = await res.json();
 
         if (res.ok) {
-            alert(data.message || "Payment submitted successfully.");
+            palert("success", data.message || "Payment submitted successfully.");l.remove();
         } else {
-            alert(data.message || "Failed to submit payment.");
+            palert("alert",data.message || "Failed to submit payment.");l.remove();
         }
     } catch (err) {
         console.error(err);
-        alert("Network error. Please try again.");
+        palert("alert","Network error. Please try again.");
     }
 }
 
