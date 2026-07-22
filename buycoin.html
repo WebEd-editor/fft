@@ -333,6 +333,7 @@ async function buyCoin() {
 
         if (res.ok) {
             palert("success", data.message || "Payment submitted successfully.");l.remove();
+            window.location.href = "https://webed-editor.github.io/fft/wallet.html";
         } else {
             palert("alert",data.message || "Failed to submit payment.");l.remove();
         }
