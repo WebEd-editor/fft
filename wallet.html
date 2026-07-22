@@ -242,7 +242,7 @@ function palert(t, txt){
         document.getElementById("coin").textContent = "🪙 " + (data?.data?.coin ?? "0.00");
         document.getElementById("cash").textContent = (data.data.coin * 2) || "0.00";
         document.getElementById("name").textContent = data.data.name + "'s Wallet";
-        document.getElementById("addCoinBtn").onclick = () => window.location.href = "https://webed-editor.github.io/fft/buycoin.html?id=${data.data.uid}";
+        document.getElementById("addCoinBtn").onclick = () => { window.location.href = `https://webed-editor.github.io/fft/buycoin.html?id=${data.data.uid}`; }
         const h = document.getElementById("history");
         h.innerHTML="";
         data.data.payment.forEach(p => {
