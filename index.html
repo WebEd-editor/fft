@@ -64,7 +64,7 @@
                     </div>
                     <div class="menu">
                         <div class="item"> My Teams > </div>
-                        <div class="item" onclick="window.location.href=`https://webed-editor.github.io/fft/wallet.html`"> Wallet > </div>
+                        <div class="item" onclick="window.location.href=`https://webed-editor.github.io/fft/wallet.html`" id="walletBtn"> Wallet > </div>
                         <div class="item" onclick="window.location.href=`https://webed-editor.github.io/fft/history.html`"> History > </div>
                         <div class="item"> Settings > </div>
                     </div>
@@ -148,6 +148,7 @@ const loader = new webpopup({
 
         document.getElementById("name").textContent = data.data.name;
         document.getElementById("uid").textContent = data.data.uid;
+        document.getElementById("walletBtn").onclick = () => `window.location.href = 'https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}'`;
     } else {
         console.log(JSON.stringify(data.message, null, 3));
     }
