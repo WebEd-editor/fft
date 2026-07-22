@@ -148,7 +148,9 @@ const loader = new webpopup({
 
         document.getElementById("name").textContent = data.data.name;
         document.getElementById("uid").textContent = data.data.uid;
-        document.getElementById("walletBtn").onclick = () => window.location.href = 'https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}';
+        document.getElementById("walletBtn").onclick = () => {
+            window.location.href = `https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}`;
+        };
     } else {
         console.log(JSON.stringify(data.message, null, 3));
     }
