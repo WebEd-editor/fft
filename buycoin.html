@@ -305,7 +305,7 @@ async function buyCoin() {
     l.show();
     const params = new URLSearchParams(window.location.search);
     const uid = params.get("id");
-    if(!uid){document.querySelector("body").text content = "login your profile."; l.remove();}
+    if(!uid){document.querySelector("body").textContent = "login your profile."; l.remove();}
     const name = document.getElementById("user_name").value.trim();
     const utr = document.getElementById("user_utr").value.trim();
     const file = document.getElementById("user_screenshot").files[0];
