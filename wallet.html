@@ -162,8 +162,8 @@
         <h3 class="we-177n8yq" id="coin">
           🪙 0.00
         </h3>
-        <p class="we-afjo41" id="cash">
-          Cash 0.00 ₹
+        <p style="margin: 0;">
+           note: 🪙1 = ₹2
         </p>
       </div>
       <div class="we-1z0b4zc">
@@ -240,11 +240,14 @@ function palert(t, txt){
         l.remove();
 
         document.getElementById("coin").textContent = "🪙 " + (data?.data?.coin ?? "0.00");
-        document.getElementById("cash").textContent = (data.data.coin * 2) || "0.00";
         document.getElementById("name").textContent = data.data.name + "'s Wallet";
-        document.getElementById("addCoinBtn").onclick = () => { window.location.href = `https://webed-editor.github.io/fft/buycoin.html?id=${data.data.uid}`; }
+        document.getElementById("withdrawCoinBtn").textContent = `Withdraw ₹${(data.data.coin * 2) || "0.00"}`;
+        document.getElementById("addCoinBtn").onclick = () => window.location.href = "https://webed-editor.github.io/fft/buycoin.html?id=${data.data.uid}";
         const h = document.getElementById("history");
         h.innerHTML="";
+        data.data.payment.sort(
+           (a, b) => new Date(b.paymentDate) - new Date(a.paymentDate)
+        );
         data.data.payment.forEach(p => {
            let color="#2a7d2b";
            let c = p.amount.replace(/^₹/, "").trim();
@@ -284,12 +287,12 @@ function palert(t, txt){
 function formatDateTime(dateString) {
   const date = new Date(dateString);
 
-  const month = date.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
-  const day = date.getUTCDate();
-  const year = date.getUTCFullYear();
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const day = date.getDate();
+  const year = date.getFullYear();
 
-  let hours = date.getUTCHours();
-  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  let hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
 
   const ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12 || 12;
