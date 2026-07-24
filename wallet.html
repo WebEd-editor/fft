@@ -1,4 +1,9 @@
-<!-- this code made in webed -->
+
+})();
+</script>
+
+</body>
+</html><!-- this code made in webed -->
 <!-- full code made in WebEd tool -->
 <!DOCTYPE html>
 <html>
@@ -248,9 +253,16 @@ function palert(t, txt){
         data.data.payment.sort(
            (a, b) => new Date(b.paymentDate) - new Date(a.paymentDate)
         );
+        let c, cc;
         data.data.payment.forEach(p => {
-           let color="#2a7d2b";
-           let c = p.amount.replace(/^₹/, "").trim();
+           let color="#4cab47";
+           if(p.amount){
+              c = p.amount.replace(/^₹/, "").trim(); cc = c/2;
+           } else if(p.coin){
+              if(p.message.toLowerCase().trim() === "tournament registration"){
+                 cc = "-"+p.coin;
+              }
+           }
            if(p.status === "pending"){color="grey"}
            h.innerHTML += `
                <div class="we-fm40gy">
@@ -259,17 +271,17 @@ function palert(t, txt){
                  </div>
                  <div class="we-94zua8">
                    <h2 class="we-8810fy">
-                     🪙 ${c/2}
+                     🪙 ${cc}
                    </h2>
                    <p class="we-o3l2nv" style="font-size: 13px">
                      ${formatDateTime(p.paymentDate)}
                    </p>
                    <p class="we-o3l2nv" style="color: ${color}; font-size: 13px;">
-                      • ${p.status}
-                   </p>                   
+                      • ${p.status} ${p?.message || ""}
+                   </p>               
                  </div>
                  <h2 class="we-3pniy8">
-                   ${p.amount}
+                   ${p?.amount ?? ""}
                  </h2>
                </div>
            `;
@@ -305,3 +317,4 @@ function formatDateTime(dateString) {
 
 </body>
 </html>
+
