@@ -161,6 +161,30 @@ const loader = new webpopup({
 
 })();
     </script>
+
+    <script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", async () => {
+
+        try {
+
+            await navigator.serviceWorker.register("/fft/sw.js");
+
+            console.log("Service Worker Registered");
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    });
+
+}
+
+ </script>
     
 </body>
 
