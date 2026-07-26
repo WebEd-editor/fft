@@ -170,18 +170,22 @@ if ("serviceWorker" in navigator) {
     try {
         const registration = await navigator.serviceWorker.register("/fft/sw.js");
 
-        console.log("SW Registered");
+        alert("SW Registered");
 
         const permission = await Notification.requestPermission();
 
-        if (permission !== "granted") return;
+        if (permission !== "granted") alert("permission not granted"); return;
 
-        const fcmToken = await getToken(messaging, {
+        try{
+          const fcmToken = await getToken(messaging, {
             vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
             serviceWorkerRegistration: registration
-        });
+          });
+        }catch(err){
+            alert("token error\n" + err);
+        }
 
-        console.log("FCM Token:", fcmToken);
+        alert("FCM Token:"+ fcmToken);
 
         if (!fcmToken) return;
 
