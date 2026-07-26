@@ -7,15 +7,15 @@ import {
 
 const firebaseConfig = {
 
-    apiKey: "...",
+    apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",
 
-    authDomain: "...",
+    authDomain: "fftpush-f29dd.firebaseapp.com",
 
-    projectId: "...",
+    projectId: "fftpush-f29dd",
 
-    messagingSenderId: "...",
+    messagingSenderId: "264854863203",
 
-    appId: "..."
+    appId: "1:264854863203:web:1852077458cf95e22c2756"
 
 };
 
@@ -28,7 +28,7 @@ Notification.requestPermission().then(async permission => {
     if(permission !== "granted") return;
 
     const token = await getToken(messaging,{
-        vapidKey:"YOUR_VAPID_KEY"
+        vapidKey:"BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY"
     });
 
     console.log(token);
