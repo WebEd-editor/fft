@@ -33,5 +33,14 @@ Notification.requestPermission().then(async permission => {
 
     console.log(token);
 
-    // Backend
+    await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          document.getElementById("uid").textContent,
+          token
+      })
+    });
 });
