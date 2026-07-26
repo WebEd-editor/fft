@@ -170,8 +170,12 @@ const loader = new webpopup({
     });
 
     console.log("FCM Token:", fcmToken);
-
     if (!fcmToken) return;
+
+    const oldToken = localStorage.getItem("fcm-token");
+
+if (oldToken !== fcmToken) {
+    localStorage.setItem("fcm-token", fcmToken);
 
     const res = await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
         method: "POST",
@@ -187,6 +191,7 @@ const loader = new webpopup({
     const result = await res.json();
     console.log(result);
     alert(result.message);
+}
 
 })();
 
