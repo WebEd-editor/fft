@@ -116,6 +116,7 @@ const loader = new webpopup({
         ///
     let tabs = document.querySelectorAll(".tab");
     let pages = document.querySelectorAll(".page");
+    let hhh;
     tabs.forEach(tab => {
         tab.onclick = () => {
             tabs.forEach(t => t.classList.remove("active"));
@@ -155,13 +156,16 @@ const loader = new webpopup({
 
     document.getElementById("name").textContent = data.data.name;
     document.getElementById("uid").textContent = data.data.uid;
+    hhh = data.data.uid;
 
     document.getElementById("walletBtn").onclick = () => {
         window.location.href = `https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}`;
     };
 
-    // Firebase
-    if ("serviceWorker" in navigator) {
+})();
+
+// Firebase
+if ("serviceWorker" in navigator) {
     try {
         const registration = await navigator.serviceWorker.register("/fft/sw.js");
 
@@ -196,11 +200,7 @@ const loader = new webpopup({
     } catch (err) {
         alert(err);
     }
-    }
-
-
-})();
-
+}
 
     </script>
 
