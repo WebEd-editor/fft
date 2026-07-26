@@ -184,6 +184,17 @@ if ("serviceWorker" in navigator) {
 
         // if (permission !== "granted") return;
 
+        firebase.initializeApp({
+    apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",  
+    authDomain: "fftpush-f29dd.firebaseapp.com",  
+    projectId: "fftpush-f29dd",  
+    messagingSenderId: "264854863203",
+    appId: "1:264854863203:web:1852077458cf95e22c2756"  
+});
+
+const messaging = firebase.messaging();
+        
+
         const fcmToken = await getToken(messaging, {
             vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
             serviceWorkerRegistration: registration
