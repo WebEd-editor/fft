@@ -174,7 +174,7 @@ if ("serviceWorker" in navigator) {
 
         const permission = await Notification.requestPermission();
 
-        if (permission !== "granted") alert("permission not granted"); return;
+        if (permission !== "granted") return;
 
         try{
           const fcmToken = await getToken(messaging, {
