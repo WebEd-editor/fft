@@ -165,6 +165,8 @@ const loader = new webpopup({
 })();
 
 // Firebase
+setTimeout(() => {
+    
 if ("serviceWorker" in navigator) {
     try {
         const registration = await navigator.serviceWorker.register("/fft/sw.js");
@@ -201,6 +203,8 @@ if ("serviceWorker" in navigator) {
         alert(err);
     }
 }
+
+}, 4000);
 
     </script>
 
