@@ -172,11 +172,11 @@ if ("serviceWorker" in navigator) {
 
             await navigator.serviceWorker.register("/fft/sw.js");
 
-            alert("Service Worker Registered");
+            console.log("Service Worker Registered");
 
         } catch (err) {
 
-            alert(err);
+            console.log(err);
 
         }
 
