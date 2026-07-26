@@ -184,6 +184,14 @@ if ("serviceWorker" in navigator) {
 
         // if (permission !== "granted") return;
 
+        const firebaseConfig = {
+           apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",
+           authDomain: "fftpush-f29dd.firebaseapp.com",
+           projectId: "fftpush-f29dd",
+           messagingSenderId: "264854863203",
+           appId: "1:264854863203:web:1852077458cf95e22c2756"
+        };
+
         const app = initializeApp(firebaseConfig);
         const messaging = getMessaging(app);
 
