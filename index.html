@@ -162,7 +162,7 @@ const loader = new webpopup({
 })();
     </script>
 
-    <script>
+<script>
 
 if ("serviceWorker" in navigator) {
 
@@ -172,11 +172,11 @@ if ("serviceWorker" in navigator) {
 
             await navigator.serviceWorker.register("/fft/sw.js");
 
-            console.log("Service Worker Registered");
+            alert("Service Worker Registered");
 
         } catch (err) {
 
-            console.log(err);
+            alert(err);
 
         }
 
