@@ -128,12 +128,12 @@ const loader = new webpopup({
 
 (async () => {
 
-    const token = localStorage.getItem("f-token");
+    const authToken = localStorage.getItem("f-token");
 
-    if (!token) {
-        document.querySelector('.userProfile').innerHTML = `
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
-               <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
+    if (!authToken) {
+        document.querySelector(".userProfile").innerHTML = `
+            <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/signup.html">Create Account</a>
+            <a style="background: var(--gold); color: black; padding: 10px;" href="https://webed-editor.github.io/fft/auth/login.html">Login Account</a>
         `;
         return;
     }
@@ -141,77 +141,55 @@ const loader = new webpopup({
     const response = await fetch("https://fft-user.onrender.com/api/me", {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${authToken}`
         }
     });
 
     const data = await response.json();
 
-    if (data.success) {
-        console.log(data.data);
-
-        document.getElementById("name").textContent = data.data.name;
-        document.getElementById("uid").textContent = data.data.uid;
-        document.getElementById("walletBtn").onclick = () => {
-            window.location.href = `https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}`;
-        };
-
-// fb -----
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-    getMessaging,
-    getToken
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-messaging.js";
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",
-
-    authDomain: "fftpush-f29dd.firebaseapp.com",
-
-    projectId: "fftpush-f29dd",
-
-    messagingSenderId: "264854863203",
-
-    appId: "1:264854863203:web:1852077458cf95e22c2756"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const messaging = getMessaging(app);
-
-Notification.requestPermission().then(async permission => {
-
-    if(permission !== "granted") return;
-
-    const token = await getToken(messaging,{
-        vapidKey:"BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY"
-    });
-
-    console.log(token);
-
-    const res = await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          data.data.uid,
-          token
-      })
-    });
-
-    alert(await res.json());
-});
-// ------
-
-    } else {
-        console.log(JSON.stringify(data.message, null, 3));
+    if (!data.success) {
+        console.log(data.message);
+        return;
     }
 
+    document.getElementById("name").textContent = data.data.name;
+    document.getElementById("uid").textContent = data.data.uid;
+
+    document.getElementById("walletBtn").onclick = () => {
+        window.location.href = `https://webed-editor.github.io/fft/wallet.html?id=${data.data.uid}`;
+    };
+
+    // Firebase
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") return;
+
+    const fcmToken = await getToken(messaging, {
+        vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY"
+    });
+
+    console.log("FCM Token:", fcmToken);
+
+    if (!fcmToken) return;
+
+    const res = await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            uid: data.data.uid,
+            token: fcmToken
+        })
+    });
+
+    const result = await res.json();
+    console.log(result);
+    alert(result.message);
+
 })();
+
+
     </script>
 
 <script>
