@@ -174,7 +174,7 @@ if ("serviceWorker" in navigator) {
 
         const permission = await Notification.requestPermission();
 
-        if (permission !== "granted") return;
+        // if (permission !== "granted") return;
 
         const fcmToken = await getToken(messaging, {
             vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
