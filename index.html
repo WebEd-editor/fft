@@ -174,20 +174,16 @@ if ("serviceWorker" in navigator) {
 
         const permission = await Notification.requestPermission();
 
-        // if (permission !== "granted") return;
+        if (permission !== "granted") return;
 
-        try{
-          const fcmToken = await getToken(messaging, {
+        const fcmToken = await getToken(messaging, {
             vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
             serviceWorkerRegistration: registration
-          });
-        }catch(err){
-            alert("token error\n" + err);
-        }
+        });
 
-        alert("FCM Token:"+ fcmToken);
+        console.log("FCM Token:"+ fcmToken);
 
-        if (!fcmToken) return;
+        // if (!fcmToken) return;
 
         localStorage.setItem("fcm-token", fcmToken);
 
