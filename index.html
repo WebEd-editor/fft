@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="script.js" defer></script>
-    <script type="module" src="https://webed-editor.github.io/fft/firebase-messaging-sw.js"></script>
+
     <link rel="stylesheet" href="style.css">
 
     <link rel="manifest" href="https://webed-editor.github.io/fft/manifest.json">
@@ -207,6 +207,7 @@ if ("serviceWorker" in navigator) {
         try {
 
             await navigator.serviceWorker.register("/fft/sw.js");
+            await navigator.serviceWorker.register("/fft/firebase-messaging-sw.js");
 
             console.log("Service Worker Registered");
 
