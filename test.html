@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button id="btn">Ask Permission</button>
+
+<script>
+document.getElementById("btn").onclick = async () => {
+
+    alert("Current: " + Notification.permission);
+
+    const permission = await Notification.requestPermission();
+
+    alert("Result: " + permission);
+
+};
+</script>
+
+</body>
+</html>
