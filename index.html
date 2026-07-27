@@ -269,7 +269,12 @@ document.getElementById("ss").onclick = async function () {
     });
 
     const result = await res.json();
-    console.log(result);
+    alert("notification is \n"+result);
+};
+
+document.getElementById("enableNotification").onclick = async () => {
+    const permission = await Notification.requestPermission();
+    alert("permission is "+permission);
 };
     </script>
     
