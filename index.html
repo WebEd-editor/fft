@@ -247,7 +247,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             const d = await res.json();
 
             if(d){
-                alert("token save "+d.success);
+                console.log(d);
             }
     
         } catch (err) {
