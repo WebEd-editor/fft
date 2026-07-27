@@ -219,7 +219,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             console.log("FCM Token:"+ fcmToken);
          
             onMessage(messaging, (payload) => {
-                alert("Foreground:", payload);
+                alert("Foreground:"+ JSON.stringify(payload));
             
                 new Notification(payload.notification.title, {
                     body: payload.notification.body,
