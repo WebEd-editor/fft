@@ -26,17 +26,17 @@ messaging.onBackgroundMessage((payload) => {
 const CACHE_NAME = "fft-v2";
 
 const FILES = [
-    "/fft/",
-    "/fft/index.html",
-    "/fft/style.css",
-    "/fft/script.js",
-    "/fft/manifest.json",
-    "/fft/auth/login.html",
-    "/fft/auth/signin.html",
-    "/fft/form/form.js",
-    "/fft/form/registration.html",
-    "/fft/buycoin.html",
-    "/fft/wallet.html"
+    "/",
+    "/index.html",
+    "/style.css",
+    "/script.js",
+    "/manifest.json",
+    "/auth/login.html",
+    "/auth/signin.html",
+    "/form/form.js",
+    "/form/registration.html",
+    "/buycoin.html",
+    "/wallet.html"
 ];
 
 self.addEventListener("install", event => {
