@@ -273,9 +273,16 @@ document.getElementById("ss").onclick = async function () {
 };
 
 document.getElementById("enableNotification").onclick = async () => {
+
     const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+        alert("Please allow notifications.");
+        return;
+    }
     alert("permission is "+permission);
 };
+        
     </script>
     
 </body>
