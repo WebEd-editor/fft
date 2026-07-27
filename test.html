@@ -5,6 +5,8 @@
 <button id="btn">Ask Permission</button>
 
 <script>
+localStorage.removeItem("fcm-token");
+    
 document.getElementById("btn").onclick = async () => {
 
     alert("Current: " + Notification.permission);
