@@ -276,6 +276,10 @@ document.getElementById("enableNotification").onclick = async () => {
 
     const permission = await Notification.requestPermission();
 
+    alert("secure "+window.isSecureContext);
+    alert("permission "+Notification.permission);
+    alert("user agent "+navigator.userAgent);
+    
     if (permission !== "granted") {
         alert("Please allow notifications.");
         return;
