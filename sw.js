@@ -23,7 +23,7 @@ messaging.onBackgroundMessage((payload) => {
 
 });
 
-const CACHE_NAME = "fft-v1";
+const CACHE_NAME = "fft-v2";
 
 const FILES = [
     "/fft/",
