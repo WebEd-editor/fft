@@ -229,7 +229,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
     
             if (!fcmToken) return;
             
-            if(localStorage.getItem("fcm-token")) return;
+            //if(localStorage.getItem("fcm-token")) return;
             
             localStorage.setItem("fcm-token", fcmToken);
     
@@ -247,7 +247,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             const d = await res.json();
 
             if(d){
-                console.log(d);
+                alert("token save "+d.success);
             }
     
         } catch (err) {
