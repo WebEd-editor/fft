@@ -110,16 +110,6 @@ import {
     getToken
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-messaging.js";
 
-const loader = new webpopup({
-   title: "please wait",
-   description: "",
-   type:"loading",
-   animation:"fadedown",
-   cancelable:false,
-   theme: "dark",
-   buttons:[],
-   position:"center center",
-});
 
         ///
     let tabs = document.querySelectorAll(".tab");
@@ -138,6 +128,17 @@ const loader = new webpopup({
 
 (async () => {
 
+    const loader = new webpopup({
+       title: "please wait",
+       description: "",
+       type:"loading",
+       animation:"fadedown",
+       cancelable:false,
+       theme: "dark",
+       buttons:[],
+       position:"center center",
+    });
+    
     const authToken = localStorage.getItem("f-token");
 
     if (!authToken) {
@@ -171,55 +172,55 @@ const loader = new webpopup({
     };
 
 
-// Firebase
+    // Firebase
+        
+    if ("serviceWorker" in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register("/fft/sw.js");
     
-if ("serviceWorker" in navigator) {
-    try {
-        const registration = await navigator.serviceWorker.register("/fft/sw.js");
-
-        alert("SW Registered");
-
-        const permission = await Notification.requestPermission();
-
-        if (permission !== "granted") return;
-
-        const firebaseConfig = {
-           apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",
-           authDomain: "fftpush-f29dd.firebaseapp.com",
-           projectId: "fftpush-f29dd",
-           messagingSenderId: "264854863203",
-           appId: "1:264854863203:web:1852077458cf95e22c2756"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const messaging = getMessaging(app);
-
-        const fcmToken = await getToken(messaging, {
-            vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
-            serviceWorkerRegistration: registration
-        });
-
-        console.log("FCM Token:"+ fcmToken);
-
-        if (!fcmToken) return;
-
-        localStorage.setItem("fcm-token", fcmToken);
-
-        await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                uid: data.data.uid,
-                token: fcmToken
-            })
-        });
-
-    } catch (err) {
-        alert(err);
+            alert("SW Registered");
+    
+            const permission = await Notification.requestPermission();
+    
+            if (permission !== "granted") return;
+    
+            const firebaseConfig = {
+               apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",
+               authDomain: "fftpush-f29dd.firebaseapp.com",
+               projectId: "fftpush-f29dd",
+               messagingSenderId: "264854863203",
+               appId: "1:264854863203:web:1852077458cf95e22c2756"
+            };
+    
+            const app = initializeApp(firebaseConfig);
+            const messaging = getMessaging(app);
+    
+            const fcmToken = await getToken(messaging, {
+                vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
+                serviceWorkerRegistration: registration
+            });
+    
+            console.log("FCM Token:"+ fcmToken);
+    
+            if (!fcmToken) return;
+    
+            localStorage.setItem("fcm-token", fcmToken);
+    
+            await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    uid: data.data.uid,
+                    token: fcmToken
+                })
+            });
+    
+        } catch (err) {
+            alert(err);
+        }
     }
-}
 
 })();
     </script>
