@@ -54,6 +54,7 @@
             <div class="page" id="profile">
                 <div class="profile userProfile">
                     <div class="avatar"></div>
+                    <button onclick="sendMsg()">send massage</button>
                     <div class="name" id="name"> username </div>
                     <div class="uid" id="uid"> UID : xxxxx000 </div>
                     <div class="stats">
@@ -246,6 +247,25 @@ import {
     }
 
 })();
+
+async function sendMsg(){
+  try{
+    const res = await fetch("https://fft-msg-push.onrender.com/send", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            token: localStorage.getItem("fcm-token")
+        })
+    });
+
+    const d = await res.json();
+    console.log(d);
+  }catch(err){
+    console.log(err);
+  }    
+}
     </script>
 
 <script>
