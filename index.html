@@ -194,7 +194,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             alert("SW Registered");
     
             const permission = await Notification.requestPermission();
-            console.log("1. notification permission "+permission);
+            alert("1. notification permission "+permission);
             if (permission !== "granted"){
                 console.log("2. notification permission "+permission);
                 return;
@@ -219,7 +219,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             console.log("FCM Token:"+ fcmToken);
          
             onMessage(messaging, (payload) => {
-                console.log("Foreground:", payload);
+                alert("Foreground:", payload);
             
                 new Notification(payload.notification.title, {
                     body: payload.notification.body,
