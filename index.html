@@ -272,7 +272,7 @@ document.getElementById("ss").onclick = async function () {
     alert("notification is \n"+result);
 };
 
-document.getElementById("enableNotification").onclick = async () => {
+/*document.getElementById("enableNotification").onclick = async () => {
 
     const permission = await Notification.requestPermission();
 
@@ -285,6 +285,16 @@ document.getElementById("enableNotification").onclick = async () => {
         return;
     }
     alert("permission is "+permission);
+};*/
+
+document.getElementById("enableNotification").onclick = async () => {
+
+    alert("Current: " + Notification.permission);
+
+    const permission = await Notification.requestPermission();
+
+    alert("Result: " + permission);
+
 };
         
     </script>
