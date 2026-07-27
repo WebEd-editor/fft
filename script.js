@@ -1,4 +1,14 @@
 
+ const loader = new webpopup({
+       title: "please wait",
+       description: "",
+       type:"loading",
+       animation:"fadedown",
+       cancelable:false,
+       theme: "dark",
+       buttons:[],
+       position:"center center",
+});
 
 
 async function homePageContent(){
