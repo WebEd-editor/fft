@@ -248,99 +248,21 @@ import {
     
 })();
 
-document.getElementById("ss").onclick = () => {
-    try{
-        const res = await fetch("https://fft-msg-push.onrender.com/send", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("fcm-token")
-            })
-        });
-    
-        const d = await res.json();
-        console.log(d);
-      }catch(err){
-        console.log(err);
-   }
-}
-        
-async function sendMsg(){
-      try{
-        const res = await fetch("https://fft-msg-push.onrender.com/send", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                token: localStorage.getItem("fcm-token")
-            })
-        });
-    
-        const d = await res.json();
-        console.log(d);
-      }catch(err){
-        console.log(err);
-      }    
-    }
+document.getElementById("ss").onclick = async function () {
+    const res = await fetch("https://fft-msg-push.onrender.com/send", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            token: localStorage.getItem("fcm-token")
+        })
+    });
+
+    const result = await res.json();
+    console.log(result);
+};
     </script>
-
-<script>
-/*
-if ("serviceWorker" in navigator) {
-    try {
-        const registration = await navigator.serviceWorker.register("/fft/sw.js");
-
-        console.log("SW Registered");
-
-        const permission = await Notification.requestPermission();
-
-        if (permission !== "granted") return;
-
-        const response = await fetch("https://fft-user.onrender.com/api/me", {
-           method: "GET",
-           headers: {
-             Authorization: `Bearer ${authToken}`
-           }
-        });
-
-    const data = await response.json();
-
-    if (!data.success) {
-        console.log(data.message);
-        return;
-    }
-
-        const fcmToken = await getToken(messaging, {
-            vapidKey: "",
-            serviceWorkerRegistration: registration
-        });
-
-        console.log("FCM Token:", fcmToken);
-
-        if (!fcmToken) return;
-
-        localStorage.setItem("fcm-token", fcmToken);
-
-        await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                uid: data.data.uid,
-                token: fcmToken
-            })
-        });
-
-    } catch (err) {
-        console.error(err);
-    }
-}
-*/
- </script>
     
 </body>
 
