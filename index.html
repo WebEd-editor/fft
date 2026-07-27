@@ -103,6 +103,18 @@
     
     <script type="module">
 
+    const loader = new webpopup({
+       title: "please wait",
+       description: "",
+       type:"loading",
+       animation:"fadedown",
+       cancelable:false,
+       theme: "dark",
+       buttons:[],
+       position:"center center",
+    });
+
+        
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
@@ -206,7 +218,7 @@ import {
     
             localStorage.setItem("fcm-token", fcmToken);
     
-            await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
+            const res = await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -216,6 +228,12 @@ import {
                     token: fcmToken
                 })
             });
+
+            const d = await res.json();
+
+            if(d){
+                console.log(d);
+            }
     
         } catch (err) {
             alert(err);
