@@ -269,7 +269,7 @@ document.getElementById("ss").onclick = async function () {
     });
 
     const result = await res.json();
-    alert("notification is \n"+JSON.stringify(result));
+    alert("notification is \n"+JSON.stringify(result.success));
 };
 
 /*document.getElementById("enableNotification").onclick = async () => {
