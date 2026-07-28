@@ -17,7 +17,7 @@ const loader = new webpopup({
 async function loadForm(){
   loader.show();
   try {
-    const res = await fetch(`https://fft-registration.onrender.com/api/tournament/${tournamentId}`);
+    const res = await fetch(`https://fft-registration-1.onrender.com/api/tournament/${tournamentId}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch tournament.");
@@ -91,7 +91,7 @@ async function registerTournament(d) {
     loader.show();
     formValidation(data);
 
-    const res = await fetch("https://fft-user.onrender.com/api/user/register", {
+    const res = await fetch("https://fft-user-1.onrender.com/api/user/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -131,7 +131,7 @@ async function registerTournament(d) {
 }
 
 async function formValidation(d){
-   const res = await fetch("https://fft-registration.onrender.com/api/user/register/validation", {
+   const res = await fetch("https://fft-registration-1.onrender.com/api/user/register/validation", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -156,7 +156,7 @@ async function registerTeam(d) {
     };
     console.log(JSON.stringify(data, null, 3));
 
-    const res = await fetch("https://fft-registration.onrender.com/api/user/register", {
+    const res = await fetch("https://fft-registration-1.onrender.com/api/user/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
