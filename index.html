@@ -162,7 +162,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
         return;
     }
 
-    const response = await fetch("https://fft-user.onrender.com/api/me", {
+    const response = await fetch("https://fft-user-1.onrender.com/api/me", {
         method: "GET",
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -233,7 +233,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             
             localStorage.setItem("fcm-token", fcmToken);
     
-            const res = await fetch("https://fft-user.onrender.com/api/save-fcm-token", {
+            const res = await fetch("https://fft-user-1.onrender.com/api/save-fcm-token", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -258,7 +258,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
 })();
 
 document.getElementById("ss").onclick = async function () {
-    const res = await fetch("https://fft-msg-push.onrender.com/send", {
+    const res = await fetch("https://fft-msg-push-1.onrender.com/send", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
