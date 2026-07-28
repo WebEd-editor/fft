@@ -14,10 +14,10 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
 
     self.registration.showNotification(
-        payload.notification.title,
+        payload.data.title,
         {
-            body: payload.notification.body,
-            icon: "file_00000000ab288207a1f3b3b381fb8c35.png"
+            body: payload.data.body,
+            icon: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png"
         }
     );
 
