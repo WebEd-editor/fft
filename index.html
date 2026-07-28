@@ -237,7 +237,8 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
             alert(err);
         }
     }
-    
+
+})();
 
 document.getElementById("ss").onclick = async function () {
     const res = await fetch("https://fft-msg-push-1.onrender.com/send", {
@@ -253,8 +254,6 @@ document.getElementById("ss").onclick = async function () {
     const result = await res.json();
     alert("notification is \n"+result.success);
 };
-
-})();
 
 /*document.getElementById("enableNotification").onclick = async () => {
 
