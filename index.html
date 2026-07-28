@@ -229,29 +229,9 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
     
             if (!fcmToken) return;
             
-            // if(localStorage.getItem("fcm-token")) return;
+            if(localStorage.getItem("fcm-token")) return;
             
             localStorage.setItem("fcm-token", fcmToken);
-           try{
-            const res = await fetch("https://fft-user-1.onrender.com/api/save-fcm-token", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    uid: data.data.uid,
-                    token: fcmToken
-                })
-            });
-
-            const d = await res.json();
-
-            if(d.success){
-                alert(JSON.stringify(d));
-            }
-           }catch(err){
-               alert(err);
-           }
     
         } catch (err) {
             alert(err);
