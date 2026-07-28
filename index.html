@@ -288,13 +288,15 @@ document.getElementById("ss").onclick = async function () {
 };*/
 
 document.getElementById("enableNotification").onclick = async () => {
-
-    alert("Current: " + Notification.permission);
-
+    /*alert("Current: " + Notification.permission);
     const permission = await Notification.requestPermission();
+    alert("Result: " + permission);*/
+    const registration = await navigator.serviceWorker.register("/fft/sw.js");
 
-    alert("Result: " + permission);
+    await navigator.serviceWorker.ready;
 
+    alert(registration.active);
+    alert(await navigator.serviceWorker.getRegistration());
 };
         
     </script>
