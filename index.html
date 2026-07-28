@@ -216,7 +216,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
                 serviceWorkerRegistration: registration
             });
     
-            console.log("FCM Token:"+ fcmToken);
+            alert("FCM Token:"+ fcmToken);
          
             onMessage(messaging, (payload) => {
                 alert("Foreground:"+ JSON.stringify(payload));
