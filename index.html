@@ -210,14 +210,7 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
     
             const app = initializeApp(firebaseConfig);
             const messaging = getMessaging(app);
-    
-            const fcmToken = await getToken(messaging, {
-                vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
-                serviceWorkerRegistration: registration
-            });
-    
-            alert("FCM Token:"+ fcmToken);
-         
+
             onMessage(messaging, (payload) => {
                 alert("Foreground:"+ JSON.stringify(payload));
             
@@ -226,6 +219,13 @@ import { onMessage } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-me
                     icon: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png"
                 });
             });
+            
+            const fcmToken = await getToken(messaging, {
+                vapidKey: "BKcukkx3kuvqZhIBDpHfNY0Cl74VJaqzCzfk6iOaLy97D2FsH4qHIp9vfOQdfP-X6k3ZT7ep8EOJ9oVMZ1HPBEY",
+                serviceWorkerRegistration: registration
+            });
+    
+            alert("FCM Token:"+ fcmToken);
     
             if (!fcmToken) return;
             
