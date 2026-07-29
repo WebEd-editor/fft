@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html>
+<head>
+    
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "76d1e5ee-054f-4e3e-a858-b5c1e5c90dec",
+    });
+  });
+</script>
+    
+</head>
 <body>
 
 <button id="btn">Ask Permission</button>
@@ -16,16 +29,6 @@ document.getElementById("btn").onclick = async () => {
     alert("Result: " + permission);
 
 };
-</script>
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "42d7ec47-6480-4b7d-96d4-334e381e8411",
-    });
-  });
 </script>
 
 </body>
