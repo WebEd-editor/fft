@@ -18,5 +18,22 @@ document.getElementById("btn").onclick = async () => {
 };
 </script>
 
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+OneSignalDeferred.push(async function (OneSignal) {
+
+    await OneSignal.init({
+        appId: "42d7ec47-6480-4b7d-96d4-334e381e8411",
+        notifyButton: {
+            enable: true
+        }
+    });
+
+});
+</script>
+
 </body>
 </html>
