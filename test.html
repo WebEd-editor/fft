@@ -4,13 +4,17 @@
     
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "76d1e5ee-054f-4e3e-a858-b5c1e5c90dec",
-      serviceWorkerPath: "/fft/OneSignalSDKWorker.js"
-    });
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function (OneSignal) {
+  await OneSignal.init({
+    appId: "76d1e5ee-054f-4e3e-a858-b5c1e5c90dec",
+
+    serviceWorkerPath: "OneSignalSDKWorker.js",
+    serviceWorkerParam: {
+      scope: "/fft/"
+    }
   });
+});
 </script>
     
 </head>
