@@ -34,7 +34,7 @@ document.getElementById("btn").onclick = async () => {
     alert("Result: " + permission);
 
 };
-
+/*
 fetch("https://fft-msg-push-1-oxvm.onrender.com/api/send-notification", {
     method: "POST",
     headers: {
@@ -45,6 +45,34 @@ fetch("https://fft-msg-push-1-oxvm.onrender.com/api/send-notification", {
         message: "New Tournament is Live 🔥"
     })
 });
+    */
+
+try {
+        const response = await fetch("https://api.onesignal.com/notifications", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Key os_v2_app_o3i6l3qfj5hd5kcywxa6lsin5q6qajl5bk4uqif2jgszkcjqv7c4hyq4rsaorsdvhmx6d7fbs6iwxh6642t3pnuqdce6rn7zyciaefy"
+            },
+            body: JSON.stringify({
+                app_id: "76d1e5ee-054f-4e3e-a858-b5c1e5c90dec",
+                included_segments: ["Subscribed Users"],
+                headings: {
+                    en: "title"
+                },
+                contents: {
+                    en: "this is a notification message"
+                }
+            })
+        });
+
+        const data = await response.json();
+
+        console.log("data " + data);
+
+    } catch (err) {
+        console.log("error " + err);
+    }
 
 </script>
 
