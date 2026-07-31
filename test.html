@@ -56,7 +56,7 @@ async function subscribeUser() {
 
     console.log(subscription);
 
-    await fetch("/api/subscribe", {
+    await fetch("https://fft-msg-push-1-oxvm.onrender.com/api/subscribe", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
