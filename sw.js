@@ -23,6 +23,30 @@ messaging.onBackgroundMessage((payload) => {
 
 });
 
+self.addEventListener("push", event => {
+
+    const data = event.data.json();
+
+    event.waitUntil(
+        self.registration.showNotification(data.title, {
+            body: data.body,
+            icon: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png",
+            badge: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png"
+        })
+    );
+
+});
+
+self.addEventListener("notificationclick", event => {
+
+    event.notification.close();
+
+    event.waitUntil(
+        clients.openWindow("/fft")
+    );
+
+});
+
 const CACHE_NAME = "fft-v2.5.3";
 
 const FILES = [
