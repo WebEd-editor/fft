@@ -49,17 +49,22 @@ async function subscribeUser() {
   }
 }
 
-async function tt(){
-  try{
-    const r = await navigator.serviceWorker.ready;
-    const sub = await r.pushManager.getSubscription();
-    if(sub){
-        await sub.unsubscribe();
-        alert("unsubscribed");
+async function tt() {
+    try {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+
+        if (subscription) {
+            alert("User subscribed");
+            return;
+        }
+
+        await subscription.unsubscribe();
+        alert("Unsubscribed successfully");
+
+    } catch (err) {
+        alert(err.message);
     }
-  }catch(err){
-      alert(err);
-  }
 }
 
 function urlBase64ToUint8Array(base64String) {
