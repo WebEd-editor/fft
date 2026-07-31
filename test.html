@@ -24,6 +24,8 @@ OneSignalDeferred.push(async function (OneSignal) {
 
     <button onclick="subscribeUser()">send message</button>
 
+    <button onclick="tt()">unsubscribe</button>
+
 <script>
 
 const PUBLIC_VAPID_KEY = "BCJvPUCtHK1Tt5pI4-RssQlaBXns9NvTCcaZiE3iAjKdMFvqH9AKuMul0i3Goq-9DB_AlqW4HGr_lfUUzfZY7MU";
@@ -66,11 +68,16 @@ async function subscribeUser() {
 }
 
 async function tt(){
+  try{
     const r = await navigator.serviceWorker.ready;
     const sub = await r.pushManager.getSubscription();
     if(sub){
         await sub.unsubscribe();
+        alert("unsubscribed");
     }
+  }catch(err){
+      alert(err);
+  }
 }
 
 function urlBase64ToUint8Array(base64String) {
