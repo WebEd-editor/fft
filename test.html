@@ -67,6 +67,14 @@ async function subscribeUser() {
     alert("Subscribed");
 }
 
+function tt(){
+    const r = await navigator.serviceWorker.ready;
+    const sub = await registration.pushManager.getSubscription();
+    if(sub){
+        await sub.unsubscribe();
+    }
+}
+
 function urlBase64ToUint8Array(base64String) {
     const padding = "=".repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
