@@ -69,7 +69,7 @@ async function subscribeUser() {
 
 async function tt(){
     const r = await navigator.serviceWorker.ready;
-    const sub = await registration.pushManager.getSubscription();
+    const sub = await r.pushManager.getSubscription();
     if(sub){
         await sub.unsubscribe();
     }
