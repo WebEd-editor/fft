@@ -7,9 +7,8 @@ async function rr(){
         }
   });
   
-  const data = await res.json();
-  
-  console.log(JSON.stringify(data));
+  const text = await res.text();
+  console.log(text);
 }
 rr();
 </script>
