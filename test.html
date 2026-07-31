@@ -67,7 +67,7 @@ async function subscribeUser() {
     alert("Subscribed");
 }
 
-function tt(){
+async function tt(){
     const r = await navigator.serviceWorker.ready;
     const sub = await registration.pushManager.getSubscription();
     if(sub){
