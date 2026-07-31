@@ -29,6 +29,7 @@ OneSignalDeferred.push(async function (OneSignal) {
 const PUBLIC_VAPID_KEY = "BCJvPUCtHK1Tt5pI4-RssQlaBXns9NvTCcaZiE3iAjKdMFvqH9AKuMul0i3Goq-9DB_AlqW4HGr_lfUUzfZY7MU";
 
 async function subscribeUser() {
+  try{
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
         alert("Push notification supported nahi hai");
         return;
@@ -59,6 +60,9 @@ async function subscribeUser() {
     });
 
     alert("Subscribed");
+  }catch(err){
+      alert(err);
+  }
 }
 
 async function tt(){
