@@ -1,29 +1,5 @@
-importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js");
 
-firebase.initializeApp({
-    apiKey: "AIzaSyAvmkr7PEQFrbwuqVCaxLDb_6inUfzpEzg",  
-    authDomain: "fftpush-f29dd.firebaseapp.com",  
-    projectId: "fftpush-f29dd",  
-    messagingSenderId: "264854863203",
-    appId: "1:264854863203:web:1852077458cf95e22c2756"  
-});
-
-const messaging = firebase.messaging();
-
-messaging.onBackgroundMessage((payload) => {
-
-    self.registration.showNotification(
-        payload.data.title,
-        {
-            body: payload.data.body,
-            icon: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png"
-        }
-    );
-
-});
-
-self.addEventListener("push", event => {
+/*self.addEventListener("push", event => {
 
     const data = event.data.json();
 
@@ -35,9 +11,43 @@ self.addEventListener("push", event => {
         })
     );
 
+});*/
+
+self.addEventListener("push", event => {
+
+    const data = event.data.json();
+
+    event.waitUntil(
+        self.registration.showNotification(data.title, {
+            body: data.body,
+            icon: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png",
+            badge: "/fft/file_00000000ab288207a1f3b3b381fb8c35.png",
+            actions: data.actions,
+            data: {
+                url: data.url
+            }
+        })
+    );
+
 });
 
 self.addEventListener("notificationclick", event => {
+    event.notification.close();
+
+    event.waitUntil(
+        clients.matchAll({ type: "window", includeUncontrolled: true })
+            .then(clientList => {
+                for (const client of clientList) {
+                    if (client.url.includes("/fft/")) {
+                        return client.focus();
+                    }
+                }
+                return clients.openWindow("/fft/");
+            })
+    );
+});
+
+/*self.addEventListener("notificationclick", event => {
 
     event.notification.close();
 
@@ -45,9 +55,9 @@ self.addEventListener("notificationclick", event => {
         clients.openWindow("/fft")
     );
 
-});
+});*/
 
-const CACHE_NAME = "fft-v2.5.3";
+const CACHE_NAME = "fft-v2.5.4";
 
 const FILES = [
     "/fft/",
