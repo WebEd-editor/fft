@@ -174,6 +174,18 @@
     };
 
 })();
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+        try {
+          await navigator.serviceWorker.register('/fft/sw.js');
+          console.log("service worker registered");
+        } catch (err) {
+            console.log(err);
+        }
+    });
+}
+
         
     </script>
     
