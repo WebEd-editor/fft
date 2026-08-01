@@ -18,7 +18,7 @@ async function homePageContent(){
    const l = h.querySelector('.lives');
    const u = h.querySelector('.upcomings');
    
-   const res = await fetch("https://fft-registration-1.onrender.com/api/content");
+   const res = await fetch("https://fft-registration-kotu.onrender.com/api/content");
    const result = await res.json();
    const k = result.data;
    loader.remove();
@@ -113,7 +113,7 @@ homePageContent();
 async function openForm(id) {
   loader.show();
   try {
-    const res = await fetch(`https://fft-registration-1.onrender.com/api/tournament/${id}`);
+    const res = await fetch(`https://fft-registration-kotu.onrender.com/api/tournament/${id}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch tournament.");
