@@ -15,26 +15,26 @@ const PUBLIC_VAPID_KEY = "BCJvPUCtHK1Tt5pI4-RssQlaBXns9NvTCcaZiE3iAjKdMFvqH9AKuM
 
 async function subscribeUser() {
   try {
-        const registration = await navigator.serviceWorker.ready;
-        const subscription = await registration.pushManager.getSubscription();
+        const reg = await navigator.serviceWorker.ready;
+        const sub = await reg.pushManager.getSubscription();
 
-        if (subscription) {
-            alert("User subscribed");
+        if (sub) {
+            console.log("User subscribed");
             return;
         }
 
-        await subscription.unsubscribe();
-        alert("Unsubscribed successfully");
+        await sub.unsubscribe();
+        console.log("Unsubscribed successfully");
 
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
-        alert("Push notification supported nahi hai");
+        alert("Push notification doesn't supported");
         return;
     }
 
     const permission = await Notification.requestPermission();
 
     if (permission !== "granted") {
-        alert("Notification permission denied");
+        console.log("Notification permission denied");
         return;
     }
 
@@ -55,9 +55,9 @@ async function subscribeUser() {
         body: JSON.stringify(subscription)
     });
 
-    alert("Subscribed");
+    console.log("Subscribed");
   }catch(err){
-      alert(err);
+      console.log(err);
   }
 }
 subscribeUser();
