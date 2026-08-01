@@ -14,8 +14,18 @@
 const PUBLIC_VAPID_KEY = "BCJvPUCtHK1Tt5pI4-RssQlaBXns9NvTCcaZiE3iAjKdMFvqH9AKuMul0i3Goq-9DB_AlqW4HGr_lfUUzfZY7MU";
 
 async function subscribeUser() {
-  tt();
-  try{
+  try {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+
+        if (subscription) {
+            alert("User subscribed");
+            return;
+        }
+
+        await subscription.unsubscribe();
+        alert("Unsubscribed successfully");
+
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
         alert("Push notification supported nahi hai");
         return;
