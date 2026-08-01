@@ -186,6 +186,57 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+const PUBLIC_VAPID_KEY = "BCJvPUCtHK1Tt5pI4-RssQlaBXns9NvTCcaZiE3iAjKdMFvqH9AKuMul0i3Goq-9DB_AlqW4HGr_lfUUzfZY7MU";
+
+async function subscribeUser() {
+  try {
+        const reg = await navigator.serviceWorker.ready;
+        const sub = await reg.pushManager.getSubscription();
+
+        if (sub) {
+            console.log("User subscribed");
+            return;
+        }
+
+        await sub.unsubscribe();
+        console.log("Unsubscribed successfully");
+
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+        alert("Push notification doesn't supported");
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+
+    if (permission !== "granted") {
+        console.log("Notification permission denied");
+        return;
+    }
+
+    const registration = await navigator.serviceWorker.register("/fft/sw.js");
+
+    const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY)
+    });
+
+    console.log(subscription);
+
+    await fetch("https://fft-msg-push-1-oxvm.onrender.com/api/subscribe", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(subscription)
+    });
+
+    console.log("Subscribed");
+  }catch(err){
+      console.log(err);
+  }
+}
+subscribeUser();
+    
         
     </script>
     
