@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Buy Coins</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+   
 <script src="https://webed-editor.github.io/fft/popup/webpopup.js"></script>
-<link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
-<link href="https://fonts.googleapis.com/css2?family=Galindo&display=swap" rel="stylesheet"/>
-    
-
-<title>FFT Buy Coins</title>
+    <link rel="stylesheet" href="https://webed-editor.github.io/fft/popup/webpopup.css">
 
 <style>
 :root{
@@ -252,15 +250,10 @@ button.pay{
       <h3>Total Amount</h3>
       <div class="amount" id="amount">₹200</div>
     </div>
+    <button class="pay" id="payAmountBtn" onclick="kk()">Pay ₹ 200</button>
   </div>
-  <div class="card">
-    <h3 style="text-align:center;">📱 Scan & Pay</h3>
-    <div class="qr"> QR CODE </div>
-  </div>
-  <div class="card">
+  <div class="card cc">
     <h3>📝 Payment Details</h3>
-    <label>Your Name</label>
-    <input id="user_name" type="text" placeholder="Enter your Name">
     <label>Transaction ID / UTR</label>
     <input id="user_utr" type="text" placeholder="Enter UTR Number">
     <div class="upload">
@@ -271,7 +264,7 @@ button.pay{
       <input id="user_screenshot" type="file" accept="image/*">
     </div>
     <div class="note"> ✅ Coins will be credited within 30-60 minutes after payment verification. </div>
-    <button class="pay" id="payBtn" onclick="buyCoin()"> Pay ₹200 & Claim 100 Coins </button>
+    <button class="pay" id="payBtn" onclick="buyCoin()"> Claim 100 Coins </button>
     <div class="footer"> 🔒 100% Secure Manual Verification </div>
   </div>
 </div>
@@ -279,19 +272,44 @@ button.pay{
 <script>
 
 const l = new webpopup({ title: "please wait", description: "", type:"loading", animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center",});
-    function palert(t, txt){ let s = new webpopup({ title: txt, description: "", type: t, animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center", }); s.show();}
-
+function palert(t, txt){ let s = new webpopup({ title: txt, description: "", type: t, animation:"fadedown", cancelable:false, theme: "dark", buttons:[], position:"center center", }); s.show();}
 
 const coin=document.getElementById("coins");
 const amount=document.getElementById("amount");
 const payBtn=document.getElementById("payBtn");
+const payAmountBtn=document.getElementById("payAmountBtn");
+let total;
 
 function update(){
    let c=parseInt(coin.value)||0;
-   let total=c*2;
+   total=c*2;
    amount.innerHTML="₹"+total;
-   payBtn.innerHTML="Pay ₹"+total+" & Claim "+c+" Coins";
+   payBtn.innerHTML= "Claim "+c+" Coins";
+   payAmountBtn.innerHTML = "Pay ₹ "+total;
+}
 
+function kk(){
+  new webpopup({
+    title: "!Important",
+    description: "Note: After completing the payment through any digital payment app, please paste the UTR Number from the payment receipt. If the UTR Number is not provided, your payment verification and approval may be delayed.",
+    type: "alert",
+    animation: "fadedown",
+    cancelable: true,
+    theme: "dark",
+    buttons: [
+       {
+          text: "pay",
+          onClick: () => window.location.href = `upi://pay?pa=9075226716@ibl&pn=FFT_Tournament&am=${total}&cu=INR`
+       },
+       {
+          text: "cancel"
+       }
+    ],
+    position: "center center",
+  }).show();
+  document.querySelector('ccc').style.display = 'none';
+  //document.querySelector('.cc').style.display = 'block';
+  location.href = 'https://www.google.com';
 }
 
 coin.oninput=update;
@@ -303,24 +321,20 @@ function copyUPI(){
 }
 
 async function buyCoin() {
-    l.show();
     const params = new URLSearchParams(window.location.search);
     const uid = params.get("id");
-    if(!uid){document.querySelector("body").textContent = "login your profile."; l.remove();}
-    const name = document.getElementById("user_name").value.trim();
     const utr = document.getElementById("user_utr").value.trim();
     const file = document.getElementById("user_screenshot").files[0];
     const amount = document.getElementById("amount").textContent;
 
-    if (!name || !utr || !file || !coins) {
-        palert("alert","Please type all fields (name, UTR, file, coins).");l.remove();
+    if (!utr || !file || !coins) {
+        alert("Please type all fields (UTR, file, coins).");
         return;
     }
 
     const formData = new FormData();
     formData.append("uid", uid);
     formData.append("amount", amount);
-    formData.append("name", name);
     formData.append("utr", utr);
     formData.append("screenshot", file);
 
@@ -333,14 +347,13 @@ async function buyCoin() {
         const data = await res.json();
 
         if (res.ok) {
-            palert("success", data.message || "Payment submitted successfully.");l.remove();
-            window.location.href = "https://webed-editor.github.io/fft/wallet.html";
+            alert(data.message || "Payment submitted successfully.");
         } else {
-            palert("alert",data.message || "Failed to submit payment.");l.remove();
+            alert(data.message || "Failed to submit payment.");
         }
     } catch (err) {
         console.error(err);
-        palert("alert","Network error. Please try again.");
+        alert("Network error. Please try again.");
     }
 }
 
