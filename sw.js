@@ -57,7 +57,7 @@ self.addEventListener("notificationclick", event => {
 
 });*/
 
-const CACHE_NAME = "fft-v2.5.5";
+const CACHE_NAME = "fft-v2.5.4";
 
 const FILES = [
     "/fft/",
