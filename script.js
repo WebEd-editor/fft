@@ -34,9 +34,9 @@ async function homePageContent(){
          c.className="carousel";
          for(let i = 0; i < k.banner.length; i++){
             c.innerHTML += `
-               <div class="banner slide">
-                  <h2>${k.banner[i].h2}</h2>
-                  <p>${k.banner[i].p}</p>
+               <div class="banner slide" style="background: url('${k.banner[i].src}') center/contain no-repeat;">
+                  <!-- <h2>${k.banner[i].h2}</h2>
+                  <p>${k.banner[i].p}</p> -->
                </div>
             `;
          }
