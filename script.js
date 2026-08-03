@@ -34,7 +34,7 @@ async function homePageContent(){
          c.className="carousel";
          for(let i = 0; i < k.banner.length; i++){
             c.innerHTML += `
-               <div class="banner slide" style="background: url('${k.banner[i].src}') center/contain no-repeat;">
+               <div class="banner slide" style="background: url('https://raw.githubusercontent.com/webed-editor/fft/main/img/file_0000000039608208abcee7ba44a8fba7.png') center/contain no-repeat;">
                   <!-- <h2>${k.banner[i].h2}</h2>
                   <p>${k.banner[i].p}</p> -->
                </div>
