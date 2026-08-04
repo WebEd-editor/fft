@@ -339,6 +339,7 @@ async function buyCoin() {
     formData.append("screenshot", file);
 
     try {
+        l.show();
         const res = await fetch("https://fft-payment-9evw.onrender.com/api/fft/payment", {
             method: "POST",
             body: formData
@@ -355,6 +356,7 @@ async function buyCoin() {
         console.error(err);
         alert("Network error. Please try again.");
     }
+    l.remove();
 }
 
 </script>
