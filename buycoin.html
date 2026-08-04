@@ -327,7 +327,7 @@ async function buyCoin() {
     const file = document.getElementById("user_screenshot").files[0];
     const amount = document.getElementById("amount").textContent;
 
-    if (!utr || !file || !coins) {
+    if (!uid || !utr || !file || !amount) {
         alert("Please type all fields (UTR, file, coins).");
         return;
     }
